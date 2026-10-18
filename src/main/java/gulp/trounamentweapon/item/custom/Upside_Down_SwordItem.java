@@ -12,8 +12,8 @@ public class Upside_Down_SwordItem extends Item {
     }
 
     @Override
-    public void postHurtEnemy(ItemStack itemStack, LivingEntity target, LivingEntity attacker) {
-        super.postHurtEnemy(itemStack, target, attacker);
-        target.requestTeleportOffset(0, 50, 0);
-    })
+    public void postHurtEnemy(ItemStack itemStack, LivingEntity entity, LivingEntity attacker) {
+        super.postHurtEnemy(itemStack, entity, attacker);
+        entity.teleportRelative(0, 50, 0);
+    }
 }
