@@ -1,5 +1,6 @@
 package gulp.trounamentweapon;
 
+import gulp.trounamentweapon.item.ModItems;
 import net.fabricmc.api.ModInitializer;
 
 import net.minecraft.resources.Identifier;
