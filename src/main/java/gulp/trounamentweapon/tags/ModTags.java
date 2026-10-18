@@ -18,8 +18,10 @@ public class ModTags {
         }
     }
     public static class Items {
+        public static final TagKey<Item> UPSIDEDOWNIUM_REPAIR =
+                createTag("upsidedownium_repair");
 
-        private static Tagkey<Item> createTag(String name) {
+        private static TagKey<Item> createTag(String name) {
             return TagKey.create(Registries.ITEM, Identifier.fromNamespaceAndPath(Tournamentweapon.MOD_ID, name));
         }
     }
