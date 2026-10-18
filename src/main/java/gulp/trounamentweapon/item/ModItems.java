@@ -25,7 +25,10 @@ public class ModItems {
 
     public static void registerModItems() {
         Tournamentweapon.LOGGER.info("Registering Mod Items for " + Tournamentweapon.MOD_ID);
-        CreativeModeTabEvents.modifyOutputEvent(CreativeModeTabs.COMBAT).register(output ->
+        CreativeModeTabEvents.modifyOutputEvent(CreativeModeTabs.COMBAT).register(output -> {
+            output.accept(UPSIDE_DOWN_SWORD);
+                }
+
                 );
 
     }
