@@ -16,7 +16,7 @@ import java.util.function.Function;
 
 public class ModItems {
     public static final Item UPSIDE_DOWN_SWORD = registerItem("upside_down_sword",
-            properties -> new Upside_Down_SwordItem(properties.durability(32)))
+            properties -> new Upside_Down_SwordItem(properties.durability(32)));
 
     private static Item registerItem(String name, Function<Item.Properties, Item> function) {
         return Registry.register(BuiltInRegistries.ITEM, Identifier.fromNamespaceAndPath(Tournamentweapon.MOD_ID, name),
