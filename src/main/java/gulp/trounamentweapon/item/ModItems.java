@@ -1,6 +1,7 @@
 package gulp.trounamentweapon.item;
 
 import gulp.trounamentweapon.Tournamentweapon;
+import gulp.trounamentweapon.item.custom.Upside_Down_SwordItem;
 import net.fabricmc.fabric.api.creativetab.v1.CreativeModeTabEvents;
 import net.fabricmc.fabric.mixin.creativetab.CreativeModeTabAccessor;
 import net.minecraft.core.Registry;
@@ -14,13 +15,16 @@ import net.minecraft.world.item.Item;
 import java.util.function.Function;
 
 public class ModItems {
+    public static final Item UPSIDE_DOWN_SWORD = registerItem("upside_down_sword", properties -> new Upside_Down_SwordItem(properties))
 
     private static Item registerItem(String name, Function<Item.Properties, Item> function) {
         return Registry.register(BuiltInRegistries.ITEM, Identifier.fromNamespaceAndPath(Tournamentweapon.MOD_ID, name),
                 function.apply(new Item.Properties().setId(ResourceKey.create(Registries.ITEM, Identifier.fromNamespaceAndPath(Tournamentweapon.MOD_ID, name)))));
     }
-    public static void registerModItems(){
+
+    public static void registerModItems() {
         Tournamentweapon.LOGGER.info("Registering Mod Items for " + Tournamentweapon.MOD_ID);
-        CreativeModeTabEvents.modifyOutputEvent(CreativeModeTabs.COMBAT).register(output -> );
+        CreativeModeTabEvents.modifyOutputEvent(CreativeModeTabs.COMBAT).register(output ->);
 
     }
+}
