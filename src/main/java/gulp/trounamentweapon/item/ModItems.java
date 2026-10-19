@@ -1,6 +1,7 @@
 package gulp.trounamentweapon.item;
 
 import gulp.trounamentweapon.Tournamentweapon;
+import gulp.trounamentweapon.item.custom.HammerItem;
 import gulp.trounamentweapon.item.custom.Upside_Down_SwordItem;
 import net.fabricmc.fabric.api.creativetab.v1.CreativeModeTabEvents;
 import net.fabricmc.fabric.mixin.creativetab.CreativeModeTabAccessor;
@@ -19,11 +20,12 @@ public class ModItems {
     public static final Item UPSIDE_DOWN_SWORD = registerItem("upside_down_sword",
             properties -> new Upside_Down_SwordItem(properties.sword(ModToolMaterials.UPSIDEDOWNIUM,
                     4, -2.4f)));
-    public static final Item SHORT_SWORD = registerItem("short sword",
-            properties -> new Short_SwordItem(properties.sword(ModToolMaterials.)))
-    public static final ShieldItem COMBO_SHIELD = registerItem("combo_shield",
-            properties -> new Item(properties.)
-          )
+    public static final Item HAMMER = registerItem("hammer",
+            properties -> new HammerItem(properties.sword(ModToolMaterials.SHORTIUM,
+                    3, -2)));
+    //public static final ShieldItem COMBO_SHIELD = registerItem("combo_shield",
+       //     properties -> new Item(properties.)
+
 
     private static Item registerItem(String name, Function<Item.Properties, Item> function) {
         return Registry.register(BuiltInRegistries.ITEM, Identifier.fromNamespaceAndPath(Tournamentweapon.MOD_ID, name),
