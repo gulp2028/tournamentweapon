@@ -16,10 +16,10 @@
 	"environment": "*",
 	"entrypoints": {
 		"main": [
-			"gulp.trounamentweapon.Tournamentweapon"
+			"gulp.tournamentweapon.Tournamentweapon"
 		],
 		"fabric-datagen": [
-			"gulp.trounamentweapon.TournamentweaponDataGenerator"
+			"gulp.tournamentweapon.TournamentweaponDataGenerator"
 		]
 	},
 	"mixins": [
