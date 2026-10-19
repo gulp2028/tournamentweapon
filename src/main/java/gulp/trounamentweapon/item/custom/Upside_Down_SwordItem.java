@@ -14,6 +14,7 @@ public class Upside_Down_SwordItem extends Item {
     @Override
     public void postHurtEnemy(ItemStack itemStack, LivingEntity entity, LivingEntity attacker) {
         super.postHurtEnemy(itemStack, entity, attacker);
+        System.out.println("PLEASE FUCKIGN WORK");
         entity.teleportRelative(0, 50, 0);
     }
 }
