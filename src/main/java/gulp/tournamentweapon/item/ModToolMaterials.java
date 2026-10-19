@@ -1,6 +1,6 @@
-package gulp.trounamentweapon.item;
+package gulp.tournamentweapon.item;
 
-import gulp.trounamentweapon.tags.ModTags;
+import gulp.tournamentweapon.tags.ModTags;
 import net.minecraft.world.item.ToolMaterial;
 
 public class ModToolMaterials {

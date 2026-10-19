@@ -1,4 +1,4 @@
-package gulp.trounamentweapon;
+package gulp.tournamentweapon;
 
 import net.fabricmc.fabric.api.datagen.v1.DataGeneratorEntrypoint;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;

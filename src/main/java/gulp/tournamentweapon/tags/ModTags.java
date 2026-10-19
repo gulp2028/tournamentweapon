@@ -1,6 +1,6 @@
-package gulp.trounamentweapon.tags;
+package gulp.tournamentweapon.tags;
 
-import gulp.trounamentweapon.Tournamentweapon;
+import gulp.tournamentweapon.Tournamentweapon;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.Identifier;
 import net.minecraft.tags.TagKey;

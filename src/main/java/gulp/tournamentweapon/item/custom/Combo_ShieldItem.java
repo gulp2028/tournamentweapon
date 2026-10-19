@@ -1,4 +1,4 @@
-package gulp.trounamentweapon.item.custom;
+package gulp.tournamentweapon.item.custom;
 
 import net.minecraft.world.item.ShieldItem;
 

@@ -1,4 +1,4 @@
-package gulp.trounamentweapon;
+package gulp.tournamentweapon;
 
 import net.fabricmc.api.ClientModInitializer;
 

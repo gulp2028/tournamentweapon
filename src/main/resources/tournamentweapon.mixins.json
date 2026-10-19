@@ -1,6 +1,6 @@
 {
 	"required": true,
-	"package": "gulp.trounamentweapon.mixin",
+	"package": "gulp.tournamentweapon.mixin",
 	"compatibilityLevel": "JAVA_25",
 	"mixins": [
 		"ExampleMixin"

@@ -1,6 +1,6 @@
-package gulp.trounamentweapon;
+package gulp.tournamentweapon;
 
-import gulp.trounamentweapon.item.ModItems;
+import gulp.tournamentweapon.item.ModItems;
 import net.fabricmc.api.ModInitializer;
 
 import net.minecraft.resources.Identifier;

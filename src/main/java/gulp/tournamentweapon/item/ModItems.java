@@ -1,10 +1,9 @@
-package gulp.trounamentweapon.item;
+package gulp.tournamentweapon.item;
 
-import gulp.trounamentweapon.Tournamentweapon;
-import gulp.trounamentweapon.item.custom.HammerItem;
-import gulp.trounamentweapon.item.custom.Upside_Down_SwordItem;
+import gulp.tournamentweapon.Tournamentweapon;
+import gulp.tournamentweapon.item.custom.HammerItem;
+import gulp.tournamentweapon.item.custom.Upside_Down_SwordItem;
 import net.fabricmc.fabric.api.creativetab.v1.CreativeModeTabEvents;
-import net.fabricmc.fabric.mixin.creativetab.CreativeModeTabAccessor;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
@@ -12,7 +11,6 @@ import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ShieldItem;
 
 import java.util.function.Function;
 
