@@ -5,8 +5,8 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 
-public class Upside_Down_SwordItem extends Item {
-    public Upside_Down_SwordItem(Properties properties) {
+public class Winged_SwordItem extends Item {
+    public Winged_SwordItem(Properties properties) {
         super(properties);
     }
 

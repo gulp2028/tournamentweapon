@@ -10,15 +10,16 @@ public class HammerItem extends Item {
     public HammerItem(Properties properties) {
         super(properties);
     }
+
     @Override
     public void postHurtEnemy(ItemStack itemStack, LivingEntity entity, LivingEntity attacker) {
         double height = attacker.getY();
-        float strength = (float) (Math.max(0, height)*0.1f);
-        if(height < 100f){
-           entity.hurt(attacker.damageSources().mobAttack(attacker), strength);
+        if (height > 100) {
+            entity.hurt(attacker.damageSources().mobAttack(attacker), 5f);
         }
 
-    }}
+    }
+}
 
 
 

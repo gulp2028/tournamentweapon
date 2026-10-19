@@ -2,7 +2,7 @@ package gulp.tournamentweapon.item;
 
 import gulp.tournamentweapon.Tournamentweapon;
 import gulp.tournamentweapon.item.custom.HammerItem;
-import gulp.tournamentweapon.item.custom.Upside_Down_SwordItem;
+import gulp.tournamentweapon.item.custom.Winged_SwordItem;
 import net.fabricmc.fabric.api.creativetab.v1.CreativeModeTabEvents;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -15,14 +15,15 @@ import net.minecraft.world.item.Item;
 import java.util.function.Function;
 
 public class ModItems {
-    public static final Item UPSIDE_DOWN_SWORD = registerItem("upside_down_sword",
-            properties -> new Upside_Down_SwordItem(properties.sword(ModToolMaterials.UPSIDEDOWNIUM,
+    public static final Item WINGED_SWORD = registerItem("winged_sword",
+            properties -> new Winged_SwordItem(properties.sword(ModToolMaterials.UPSIDEDOWNIUM,
                     4, -2.4f)));
     public static final Item HAMMER = registerItem("hammer",
             properties -> new HammerItem(properties.sword(ModToolMaterials.SHORTIUM,
-                    3, -2)));
+                    2, -2)));
     //public static final ShieldItem COMBO_SHIELD = registerItem("combo_shield",
        //     properties -> new Item(properties.)
+
 
 
 
@@ -34,7 +35,8 @@ public class ModItems {
     public static void registerModItems() {
         Tournamentweapon.LOGGER.info("Registering Mod Items for " + Tournamentweapon.MOD_ID);
         CreativeModeTabEvents.modifyOutputEvent(CreativeModeTabs.COMBAT).register(output -> {
-            output.accept(UPSIDE_DOWN_SWORD);
+            output.accept(WINGED_SWORD);
+            output.accept(HAMMER);
                 }
 
                 );
