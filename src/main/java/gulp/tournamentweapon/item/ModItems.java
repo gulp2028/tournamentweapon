@@ -24,6 +24,9 @@ public class ModItems {
                     2, -2)));
     public static final Item FLARE_GUN = registerItem("flare_gun",
             properties -> new Flare_GunItem(properties.durability(4)));
+    public static final Item ICE_AXE = registerItem("ice_axe",
+            properties -> new Ice_AxeItem(properties.axe(ModToolMaterials.ICEIUM,
+                    2, -2)));
     //public static final ShieldItem COMBO_SHIELD = registerItem("combo_shield",
        //     properties -> new Item(properties.)
 
