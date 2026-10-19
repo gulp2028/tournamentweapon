@@ -1,6 +1,7 @@
 package gulp.tournamentweapon.item;
 
 import gulp.tournamentweapon.Tournamentweapon;
+import gulp.tournamentweapon.item.custom.Flare_GunItem;
 import gulp.tournamentweapon.item.custom.HammerItem;
 import gulp.tournamentweapon.item.custom.Winged_SwordItem;
 import net.fabricmc.fabric.api.creativetab.v1.CreativeModeTabEvents;
@@ -21,6 +22,8 @@ public class ModItems {
     public static final Item HAMMER = registerItem("hammer",
             properties -> new HammerItem(properties.sword(ModToolMaterials.SHORTIUM,
                     2, -2)));
+    public static final Item FLARE_GUN = registerItem("flare_gun",
+            properties -> new Flare_GunItem(properties.durability(4)));
     //public static final ShieldItem COMBO_SHIELD = registerItem("combo_shield",
        //     properties -> new Item(properties.)
 
