@@ -46,7 +46,7 @@ public class Flare extends AbstractArrow {
         Entity entity = hitResult.getEntity();
         entity.igniteForSeconds(15);
         Entity currentOwner = this.getOwner();
-        double flareDamage = this.basedamage;
+        double flareDamage = 4f;
         DamageSource damageSource = this.damageSources().arrow(this, (Entity) (currentOwner != null ? currentOwner : this));
         if (this.getWeaponItem() != null) {
             Level var9 = this.level();

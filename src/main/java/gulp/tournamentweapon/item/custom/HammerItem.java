@@ -10,19 +10,11 @@ public class HammerItem extends Item {
     public HammerItem(Properties properties) {
         super(properties);
     }
-
-
-    @Override
-    public void HurtEnemy(@NonNull ItemStack itemStack, @NonNull LivingEntity entity, LivingEntity attacker) {
-        double height = attacker.getY();
-        double damage = height * 0.1;
+    private double height;
+    public double damage = height;
 
 
 
-
-        }
-
-    }
 }
 
 
