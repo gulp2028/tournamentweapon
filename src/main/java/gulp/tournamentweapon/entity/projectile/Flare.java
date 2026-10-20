@@ -1,7 +1,6 @@
 package gulp.tournamentweapon.entity.projectile;
 
 
-import net.minecraft.advancements.triggers.CriteriaTriggers;
 import net.minecraft.network.protocol.game.ClientboundGameEventPacket;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
@@ -16,15 +15,13 @@ import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.EntityHitResult;
 
-import java.util.List;
-
 public class Flare extends AbstractArrow {
     private static final double FLARE_DAMAGE = (double) 3.0f;
-    private double flaredamage;
+    private double basedamage;
 
     protected Flare(EntityType<? extends AbstractArrow> type, Level level) {
         super(type, level);
-        this. double basedamage = 2.0f;
+        this.double basedamage = 2.0f;
 
 
     }
@@ -38,6 +35,10 @@ public class Flare extends AbstractArrow {
     protected float getAirDrag() {
         return 0.999F;
     }
+    @Override
+    protected double getDefaultGravity(){
+        return 0.08;
+    }
 
     @Override
     public void onHitEntity(EntityHitResult hitResult) {
@@ -45,13 +46,13 @@ public class Flare extends AbstractArrow {
         Entity entity = hitResult.getEntity();
         entity.igniteForSeconds(15);
         Entity currentOwner = this.getOwner();
-        double flareDamage = this.flaredamage;
+        double flareDamage = this.basedamage;
         DamageSource damageSource = this.damageSources().arrow(this, (Entity) (currentOwner != null ? currentOwner : this));
         if (this.getWeaponItem() != null) {
             Level var9 = this.level();
             if (var9 instanceof ServerLevel) {
                 ServerLevel serverLevel = (ServerLevel) var9;
-                flareDamage = (double) EnchantmentHelper.modifyDamage(serverLevel, this.getWeaponItem(), entity, damageSource, (float) arrowDamage);
+                flareDamage = (double) EnchantmentHelper.modifyDamage(serverLevel, this.getWeaponItem(), entity, damageSource, (float) flareDamage);
             }
         }
         if (entity.hurtOrSimulate(damageSource, (float) flareDamage)) {
