@@ -24,7 +24,7 @@ public class ModItems {
             properties -> new HammerItem(properties.sword(ModToolMaterials.SHORTIUM,
                    5 , -2)));
     public static final Item FLARE_GUN = registerItem("flare_gun",
-            properties -> new Flare_GunItem(properties.durability(4)));
+            properties -> new Flare_GunItem(properties.durability(500)));
     public static final Item ICE_AXE = registerItem("ice_axe",
             properties -> new Ice_AxeItem(properties.axe(ModToolMaterials.ICIUM,
                     2, -2)));

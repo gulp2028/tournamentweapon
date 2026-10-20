@@ -1,6 +1,6 @@
 {
-  "parent": "minecraft::item/handheld",
+  "parent": "minecraft:item/generated",
   "textures": {
-    "layer0":"tournamentweapon:item/hammer"
+    "layer0": "tournamentweapon:item/hammer"
   }
 }
