@@ -28,6 +28,7 @@ public class ModItems {
     public static final Item ICE_AXE = registerItem("ice_axe",
             properties -> new Ice_AxeItem(properties.axe(ModToolMaterials.ICIUM,
                     2, -2)));
+    public static final Item FLARE = registerItem("flare", Item::new);
     //public static final ShieldItem COMBO_SHIELD = registerItem("combo_shield",
        //     properties -> new Item(properties.)
 
