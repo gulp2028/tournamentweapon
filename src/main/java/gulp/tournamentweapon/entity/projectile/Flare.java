@@ -40,6 +40,14 @@ public class Flare extends AbstractArrow {
         Entity entity = hitResult.getEntity();
         entity.igniteForSeconds(15);
         int damage = (int) this.flaredamage;
+        DamageSource damageSource = this.damageSources().arrow(this, (Entity)(currentOwner != null ? currentOwner : this));
+        if (this.getWeaponItem() != null) {
+            Level var9 = this.level();
+            if (var9 instanceof ServerLevel) {
+                ServerLevel serverLevel = (ServerLevel)var9;
+                arrowDamage = (double)EnchantmentHelper.modifyDamage(serverLevel, this.getWeaponItem(), entity, damageSource, (float)arrowDamage);
+            }
+        }
         if (entity.hurtOrSimulate(damageSource, (float)damage)) {
             if (entity instanceof LivingEntity) {
                 LivingEntity mob = (LivingEntity)entity;
