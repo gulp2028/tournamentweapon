@@ -21,7 +21,7 @@ public class Flare extends AbstractArrow {
 
     protected Flare(EntityType<? extends AbstractArrow> type, Level level) {
         super(type, level);
-        //this.double basedamage = 2.0f;
+
 
 
     }
