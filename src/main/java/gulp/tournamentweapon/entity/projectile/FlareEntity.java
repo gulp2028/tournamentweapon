@@ -2,12 +2,14 @@ package gulp.tournamentweapon.entity.projectile;
 
 
 import gulp.tournamentweapon.item.ModItems;
+import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.projectile.arrow.AbstractArrow;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.BaseFireBlock;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
 
@@ -27,6 +29,12 @@ public class FlareEntity extends AbstractArrow {
     protected void onHitBlock(BlockHitResult hitResult){
         super.onHitBlock(hitResult);
         Level level = level();
+        if(!level.isClientSide()) {
+            BlockPos pos =  hitResult.getBlockPos().relative(hitResult.getDirection());
+            if (level.isEmptyBlock(pos)) {
+                level.setBlockAndUpdate(pos, BaseFireBlock.getState(level,pos));
+            }
+        }
     }
 
 
