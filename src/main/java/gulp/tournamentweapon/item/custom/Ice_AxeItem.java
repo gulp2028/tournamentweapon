@@ -16,7 +16,9 @@ public class Ice_AxeItem extends Item {
     public void hurtEnemy(ItemStack itemStack, LivingEntity entity, LivingEntity attacker){
         if(entity.isOnFire()){
             entity.clearFire();
-            if (entity.level() instanceof )
+            if (entity.level() instanceof ServerLevel serverLevel) {
+                DamageSource damageSource = attacker.damageSources()
+            }
 
             entity.hurtServer();
 
