@@ -26,6 +26,7 @@ public class HammerItem extends Item {
                 );
                 entity.hurtServer(serverLevel, damageSource, 4f);
                 entity.addEffect(new MobEffectInstance(MobEffects.SLOWNESS, 15));
+                entity.addEffect(new MobEffectInstance(MobEffects.WEAKNESS, 15));
 
             } else if (height >= 50 && height < 100) {
                 if (entity.level() instanceof ServerLevel serverLevel) {
@@ -34,6 +35,7 @@ public class HammerItem extends Item {
                     );
                     entity.hurtServer(serverLevel, damageSource, 8f);
                     entity.addEffect(new MobEffectInstance(MobEffects.SLOWNESS, 20));
+                    entity.addEffect(new MobEffectInstance(MobEffects.WEAKNESS, 20));
                 }
 
             } else if (height >= 100 && height < 150) {
@@ -43,6 +45,7 @@ public class HammerItem extends Item {
                     );
                     entity.hurtServer(serverLevel, damageSource, 12f);
                     entity.addEffect(new MobEffectInstance(MobEffects.SLOWNESS, 30));
+                    entity.addEffect(new MobEffectInstance(MobEffects.WEAKNESS, 30));
                 }
 
             }
