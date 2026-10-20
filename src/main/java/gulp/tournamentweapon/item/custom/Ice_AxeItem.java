@@ -1,5 +1,6 @@
 package gulp.tournamentweapon.item.custom;
 
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.LivingEntity;
@@ -14,7 +15,7 @@ public class Ice_AxeItem extends Item {
     public void hurtEnemy(ItemStack itemStack, LivingEntity entity, LivingEntity attacker){
         if(entity.isOnFire()){
             entity.clearFire();
-            //entity.hurt()
+            entity.hurtServer(new ServerLevel(), attacker, 20f);
 
         }
 
