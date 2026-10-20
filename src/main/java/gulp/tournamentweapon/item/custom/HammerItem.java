@@ -15,9 +15,9 @@ public class HammerItem extends Item {
     public void hurtEnemy(ItemStack itemStack,LivingEntity entity,LivingEntity attacker) {
         double height = attacker.getY();
         double damage = height*0.75;
-        entity.hurtServer(, attacker, damage);
+        //entity.hurtServer(, attacker, damage);
     }
-)
+
 
 
 
