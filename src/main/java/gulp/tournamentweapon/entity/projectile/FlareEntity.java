@@ -1,12 +1,14 @@
 package gulp.tournamentweapon.entity.projectile;
 
 
+import gulp.tournamentweapon.item.ModItems;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.projectile.arrow.AbstractArrow;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
 
 public class FlareEntity extends AbstractArrow {
@@ -19,7 +21,12 @@ public class FlareEntity extends AbstractArrow {
     }
     @Override
     protected Item getDefualtItem() {
-        return ModItems.
+        return ModItems.FLARE
+    }
+    @Override
+    protected void onHitBlock(BlockHitResult hitResult){
+        super.onHitBlock(hitResult);
+        Level level = level();
     }
 
 
