@@ -13,7 +13,6 @@ public class Winged_SwordItem extends Item {
     @Override
     public void postHurtEnemy(ItemStack itemStack, LivingEntity entity, LivingEntity attacker) {
         super.postHurtEnemy(itemStack, entity, attacker);
-
         entity.teleportRelative(0, 50, 0);
         attacker.teleportRelative(0,54,0);
         super.postHurtEnemy(itemStack, entity, attacker);
@@ -22,10 +21,8 @@ public class Winged_SwordItem extends Item {
         if (!(attacker instanceof Player player)) {
             return;
         }
-
         if (player.getCooldowns().isOnCooldown(itemStack)) {
-            return;
-        }
+            return;}
         player.getCooldowns().addCooldown(itemStack, 60);
     }
 
