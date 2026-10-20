@@ -12,37 +12,40 @@ public class HammerItem extends Item {
     public HammerItem(Properties properties) {
         super(properties);
     }
+
     @Override
-    public void hurtEnemy(ItemStack itemStack,LivingEntity entity,LivingEntity attacker) {
+    public void hurtEnemy(ItemStack itemStack, LivingEntity entity, LivingEntity attacker) {
         double height = attacker.getY();
-        double damage = height*0.75;
-        if( height >= 0 && height < 50) {
+        double damage = height * 0.75;
+        if (height >= 0 && height < 50) {
             if (entity.level() instanceof ServerLevel serverLevel) {
                 DamageSource damageSource = attacker.damageSources().playerAttack(
                         attacker instanceof Player player ? player : null
                 );
+                entity.hurtServer(serverLevel, damageSource, 4f);
 
-        } else if (height >= 50 && height < 100) {
+            } else if (height >= 50 && height < 100) {
                 if (entity.level() instanceof ServerLevel serverLevel) {
                     DamageSource damageSource = attacker.damageSources().playerAttack(
                             attacker instanceof Player player ? player : null
                     );
-            }
+                    entity.hurtServer(serverLevel, damageSource, 8f);
+                }
 
-        } else if (height >= 100 && height < 150){
+            } else if (height >= 100 && height < 150) {
                 if (entity.level() instanceof ServerLevel serverLevel) {
                     DamageSource damageSource = attacker.damageSources().playerAttack(
                             attacker instanceof Player player ? player : null
                     );
-            }
+                    entity.hurtServer(serverLevel, damageSource, 12f);
+                }
 
+            }
         }
+
     }
-
-
-
-
 }
+
 
 
 
