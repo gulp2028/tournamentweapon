@@ -1,6 +1,6 @@
 {
   "parent": "minecraft::item/handheld",
   "textures": {
-    "layer0":"tournamentweapon:item/upside_down_sword"
+    "layer0":"tournamentweapon:item/winged_sword"
   }
 }
