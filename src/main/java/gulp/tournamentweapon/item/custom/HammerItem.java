@@ -15,7 +15,13 @@ public class HammerItem extends Item {
     public void hurtEnemy(ItemStack itemStack,LivingEntity entity,LivingEntity attacker) {
         double height = attacker.getY();
         double damage = height*0.75;
-        //entity.hurtServer(, attacker, damage);
+        if( height >= 0 && height < 50) {
+
+        } else if (height >= 50 && height < 100) {
+
+        } else if (height >= 100 && height < 150){
+
+        }
     }
 
 
