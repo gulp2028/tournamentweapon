@@ -5,6 +5,7 @@ import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 
@@ -17,10 +18,13 @@ public class Ice_AxeItem extends Item {
         if(entity.isOnFire()){
             entity.clearFire();
             if (entity.level() instanceof ServerLevel serverLevel) {
-                DamageSource damageSource = attacker.damageSources()
+                DamageSource damageSource = attacker.damageSources().playerAttack(
+                        attacker instanceof Player player ? player : null
+                );
+                entity.hurtServer(serverLevel, damageSource, 10f);
             }
 
-            entity.hurtServer();
+
 
         }
 
