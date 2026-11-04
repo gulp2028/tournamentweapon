@@ -14,17 +14,11 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
 
 public class FlareEntity extends AbstractArrow {
-    private static final double FLARE_DAMAGE = (double) 3.0f;
-    private double basedamage;
-
     protected FlareEntity(EntityType<? extends AbstractArrow> type, Level level) {
         super(type, level);
 
     }
-    @Override
-    protected Item getDefualtItem() {
-        return ModItems.FLARE
-    }
+
     @Override
     protected void onHitBlock(BlockHitResult hitResult){
         super.onHitBlock(hitResult);
