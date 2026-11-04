@@ -39,6 +39,8 @@ public class ModRecipesProvider extends FabricRecipeProvider {
                         .pattern("II")
                         .define('S', Items.STONE_BRICKS)
                         .define('I', Items.IRON_INGOT)
+                        .unlockedBy(getHasName(Items.STONE_BRICKS), has(Items.STONE_BRICKS))
+                        .unlockedBy(getHasName(Items.IRON_INGOT), has(Items.IRON_INGOT))
                         .group("shortium")
                         .save(output);
                 shaped(RecipeCategory.MISC, ModItems.UPSIDEDOWNIUM, 1)
@@ -46,6 +48,8 @@ public class ModRecipesProvider extends FabricRecipeProvider {
                         .pattern("II")
                         .define('F', Items.FEATHER)
                         .define('I', Items.IRON_INGOT)
+                        .unlockedBy(getHasName(Items.FEATHER), has(Items.FEATHER))
+                        .unlockedBy(getHasName(Items.IRON_INGOT), has(Items.IRON_INGOT))
                         .group("upsidedownium")
                         .save(output);
 
@@ -59,4 +63,3 @@ public class ModRecipesProvider extends FabricRecipeProvider {
     public String getName(){
         return "Tournamentmod Recipes";
     }
-}
