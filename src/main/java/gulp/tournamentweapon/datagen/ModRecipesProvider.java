@@ -20,10 +20,9 @@ public class ModRecipesProvider extends FabricRecipeProvider {
         super(output, registriesFuture);
     }
 
-
     @Override
     protected RecipeProvider createRecipeProvider(HolderLookup.Provider registries, RecipeOutput output) {
-        return new RecipeProvider((BootstrapContext<Recipe<?>>) registries, (BootstrapContext<Advancement>) output) {
+        return new RecipeProvider(registries, output) {
             @Override
             public void buildRecipes() {
                 shaped(RecipeCategory.MISC, ModItems.ICIUM, 1)
@@ -31,6 +30,8 @@ public class ModRecipesProvider extends FabricRecipeProvider {
                         .pattern("II")
                         .define('B', Items.BLUE_ICE)
                         .define('I', Items.IRON_INGOT)
+                        .unlockedBy(getHasName(Items.BLUE_ICE), has(Items.BLUE_EGG))
+                        .unlockedBy(getHasName(Items.IRON_INGOT), has(Items.IRON_INGOT))
                         .group("icium")
                         .save(output);
                 shaped(RecipeCategory.MISC, ModItems.SHORTIUM, 1)
@@ -50,6 +51,8 @@ public class ModRecipesProvider extends FabricRecipeProvider {
 
             }
         };
+    }
+
 
     }
     @Override
