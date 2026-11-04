@@ -23,7 +23,7 @@ public class ModRecipesProvider extends FabricRecipeProvider {
 
     @Override
     protected RecipeProvider createRecipeProvider(HolderLookup.Provider registries, RecipeOutput output) {
-        return new RecipeProvider(registries, output) {
+        return new RecipeProvider((BootstrapContext<Recipe<?>>) registries, (BootstrapContext<Advancement>) output) {
             @Override
             public void buildRecipes() {
                 shaped(RecipeCategory.MISC, ModItems.ICIUM, 1)
@@ -40,12 +40,12 @@ public class ModRecipesProvider extends FabricRecipeProvider {
                         .define('I', Items.IRON_INGOT)
                         .group("shortium")
                         .save(output);
-                shaped(RecipeCategory.MISC, ModItems.SHORTIUM, 1)
-                        .pattern("SS")
+                shaped(RecipeCategory.MISC, ModItems.UPSIDEDOWNIUM, 1)
                         .pattern("FF")
+                        .pattern("II")
                         .define('F', Items.FEATHER)
                         .define('I', Items.IRON_INGOT)
-                        .group("shortium")
+                        .group("upsidedownium")
                         .save(output);
 
             }
