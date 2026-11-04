@@ -17,6 +17,8 @@ import net.minecraft.world.item.Item;
 import java.util.function.Function;
 
 public class ModItems {
+    public static final Item UPSIDEDOWNIUM = registerItem("upsidedownium", Item::new);
+
     public static final Item WINGED_SWORD = registerItem("winged_sword",
             properties -> new Winged_SwordItem(properties.sword(ModToolMaterials.UPSIDEDOWNIUM,
                     4, -2.4f)));
