@@ -6,6 +6,7 @@ import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.recipes.RecipeCategory;
+import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.data.recipes.RecipeProvider;
 import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.world.item.Items;
@@ -19,19 +20,33 @@ public class ModRecipesProvider extends FabricRecipeProvider {
         super(output, registriesFuture);
     }
 
+
     @Override
-    protected RecipeProvider createRecipeProvider(HolderLookup.Provider registries, BootstrapContext<Recipe<?>> recipes, BootstrapContext<Advancement> advancements) {
+    protected RecipeProvider createRecipeProvider(HolderLookup.Provider registries, RecipeOutput output) {
         return new RecipeProvider(registries, output) {
             @Override
             public void buildRecipes() {
-                shaped(RecipeCategory.MISC, ModItems.ICIUM)
+                shaped(RecipeCategory.MISC, ModItems.ICIUM, 1)
                         .pattern("BB")
                         .pattern("II")
                         .define('B', Items.BLUE_ICE)
                         .define('I', Items.IRON_INGOT)
-                        .group("icium");
-
-
+                        .group("icium")
+                        .save(output);
+                shaped(RecipeCategory.MISC, ModItems.SHORTIUM, 1)
+                        .pattern("SS")
+                        .pattern("II")
+                        .define('S', Items.STONE_BRICKS)
+                        .define('I', Items.IRON_INGOT)
+                        .group("shortium")
+                        .save(output);
+                shaped(RecipeCategory.MISC, ModItems.SHORTIUM, 1)
+                        .pattern("SS")
+                        .pattern("FF")
+                        .define('F', Items.FEATHER)
+                        .define('I', Items.IRON_INGOT)
+                        .group("shortium")
+                        .save(output);
 
             }
         };
