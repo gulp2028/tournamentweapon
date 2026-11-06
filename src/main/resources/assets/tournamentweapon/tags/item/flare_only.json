@@ -1,3 +1,6 @@
 {
-
+  "replace": false,
+  "values": [
+    "tournamentweapon:flare"
+  ]
 }
