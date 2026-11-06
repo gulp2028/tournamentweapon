@@ -21,7 +21,7 @@ public class Ice_AxeItem extends Item {
                 DamageSource damageSource = attacker.damageSources().playerAttack(
                         attacker instanceof Player player ? player : null
                 );
-                entity.hurtServer(serverLevel, damageSource, 10f);
+                entity.hurtServer(serverLevel, damageSource, 20f);
             }
         }
 
