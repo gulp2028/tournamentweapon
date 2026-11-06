@@ -1,4 +1,5 @@
 package gulp.tournamentweapon.item.custom;
+import gulp.tournamentweapon.entity.projectile.FlareEntity;
 import gulp.tournamentweapon.item.ModItemTags;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.LivingEntity;
@@ -24,13 +25,10 @@ public class Flare_GunItem extends CrossbowItem {
 
     @Override
     protected Projectile createProjectile(final Level level, final LivingEntity shooter, final ItemStack heldItem, final ItemStack projectile, final boolean isCrit) {
-        if (projectile.is(Items.FIREWORK_ROCKET)) {
-            return new FireworkRocketEntity(level, projectile, shooter, shooter.getX(), shooter.getEyeY() - (double)0.15F, shooter.getZ(), true);
-        } else {
             Projectile projectileEntity = super.createProjectile(level, shooter, heldItem, projectile, isCrit);
-            if (projectileEntity instanceof AbstractArrow) {
-                AbstractArrow arrow = (AbstractArrow)projectileEntity;
-                arrow.setSoundEvent(SoundEvents.CROSSBOW_HIT);
+            if (projectileEntity instanceof FlareEntity) {
+                FlareEntity flare = (FlareEntity) projectileEntity;
+                flare.setSoundEvent(SoundEvents.CROSSBOW_HIT);
             }
 
             return projectileEntity;
