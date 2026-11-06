@@ -1,4 +1,5 @@
 package gulp.tournamentweapon.item.custom;
+import gulp.tournamentweapon.item.ModItemTags;
 import net.minecraft.world.item.CrossbowItem;
 import net.minecraft.world.item.ItemStack;
 
@@ -10,9 +11,12 @@ public class Flare_GunItem extends CrossbowItem {
 
     }
     @Override
-    public Predicate<ItemStack> getSupportedHeldProjectiles(){
-        public static final Predicate<ItemStack> FLARE_ONLY = (itemStack ->
-                itemStack.is(ModItemTags));}
+    public Predicate<ItemStack> getSupportedHeldProjectiles() {
+        return public static final Predicate<ItemStack> FLARE_ONLY = (itemStack ->
+                itemStack.is(ModItemTags.FLARE_ONLY));
+    }
+
+
 
 
 
