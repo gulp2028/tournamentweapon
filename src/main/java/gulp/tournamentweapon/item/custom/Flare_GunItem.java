@@ -11,7 +11,8 @@ public class Flare_GunItem extends CrossbowItem {
     }
     @Override
     public Predicate<ItemStack> getSupportedHeldProjectiles(){
-        return ARROW_ONLY;}
+        public static final Predicate<ItemStack> FLARE_ONLY = (itemStack ->
+                itemStack.is(ModItemTags));}
 
 
 

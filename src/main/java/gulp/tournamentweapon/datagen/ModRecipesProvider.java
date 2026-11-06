@@ -22,39 +22,40 @@ public class ModRecipesProvider extends FabricRecipeProvider {
 
     @Override
     protected RecipeProvider createRecipeProvider(HolderLookup.Provider registries, BootstrapContext<Recipe<?>> recipes, BootstrapContext<Advancement> advancements) {
-        return new RecipeProvider(registries, output) {
+
+        return new RecipeProvider((BootstrapContext<Recipe<?>>) registries, (BootstrapContext<Advancement>) output) {
             @Override
             public void buildRecipes() {
+
                 shaped(RecipeCategory.MISC, ModItems.ICIUM, 1)
                         .pattern("BB")
                         .pattern("II")
                         .define('B', Items.BLUE_ICE)
                         .define('I', Items.IRON_INGOT)
-                        .unlockedBy(getHasName(Items.BLUE_ICE), has(Items.BLUE_EGG))
-                        .unlockedBy(getHasName(Items.IRON_INGOT), has(Items.IRON_INGOT))
+                        .unlockedBy(getHasName(Items.BLUE_ICE), has(Items.BLUE_ICE))
                         .group("icium")
                         .save(output);
+
                 shaped(RecipeCategory.MISC, ModItems.SHORTIUM, 1)
                         .pattern("SS")
                         .pattern("II")
                         .define('S', Items.STONE_BRICKS)
                         .define('I', Items.IRON_INGOT)
                         .unlockedBy(getHasName(Items.STONE_BRICKS), has(Items.STONE_BRICKS))
-                        .unlockedBy(getHasName(Items.IRON_INGOT), has(Items.IRON_INGOT))
                         .group("shortium")
                         .save(output);
+
                 shaped(RecipeCategory.MISC, ModItems.UPSIDEDOWNIUM, 1)
                         .pattern("FF")
                         .pattern("II")
                         .define('F', Items.FEATHER)
                         .define('I', Items.IRON_INGOT)
                         .unlockedBy(getHasName(Items.FEATHER), has(Items.FEATHER))
-                        .unlockedBy(getHasName(Items.IRON_INGOT), has(Items.IRON_INGOT))
                         .group("upsidedownium")
                         .save(output);
-
             }
         };
+    }
     }
 
 
