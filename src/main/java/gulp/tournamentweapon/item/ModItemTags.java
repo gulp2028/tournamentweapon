@@ -9,5 +9,5 @@ import net.minecraft.world.item.Item;
 public class ModItemTags {
     public static final TagKey<Item> FLARE_ONLY =
             TagKey.create(Registries.ITEM,
-                    Identifier.fromNamespaceAndPath(Tournamentweapon.MOD_ID), "flare_only");
+                    Identifier.fromNamespaceAndPath(Tournamentweapon.MOD_ID, "flare_only"));
 }
