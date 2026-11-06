@@ -23,10 +23,10 @@ public class ModModelProvider extends FabricModelProvider {
         itemModelGenerators.generateFlatItem(ModItems.ICIUM, ModelTemplates.FLAT_ITEM);
         itemModelGenerators.generateFlatItem(ModItems.SHORTIUM, ModelTemplates.FLAT_ITEM);
         itemModelGenerators.generateFlatItem(ModItems.UPSIDEDOWNIUM, ModelTemplates.FLAT_ITEM);
-        itemModelGenerators.generateFlatItem(ModItems.WINGED_SWORD, ModelTemplates.FLAT_ITEM);
-        itemModelGenerators.generateFlatItem(ModItems.HAMMER, ModelTemplates.FLAT_ITEM);
+        itemModelGenerators.generateFlatItem(ModItems.WINGED_SWORD, ModelTemplates.FLAT_HANDHELD_ITEM);
+        itemModelGenerators.generateFlatItem(ModItems.HAMMER, ModelTemplates.FLAT_HANDHELD_ITEM);
         itemModelGenerators.generateFlatItem(ModItems.FLARE, ModelTemplates.FLAT_ITEM);
-        itemModelGenerators.generateFlatItem(ModItems.FLARE_GUN, ModelTemplates.FLAT_ITEM);
-        itemModelGenerators.generateFlatItem(ModItems.ICE_AXE, ModelTemplates.FLAT_ITEM);
+        itemModelGenerators.generateFlatItem(ModItems.FLARE_GUN, ModelTemplates.CROSSBOW);
+        itemModelGenerators.generateFlatItem(ModItems.ICE_AXE, ModelTemplates.SPEAR_IN_HAND);
     }
 }
