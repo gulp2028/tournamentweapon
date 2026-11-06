@@ -23,9 +23,6 @@ public class Ice_AxeItem extends Item {
                 );
                 entity.hurtServer(serverLevel, damageSource, 10f);
             }
-
-
-
         }
 
     }

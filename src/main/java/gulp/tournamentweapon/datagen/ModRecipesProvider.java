@@ -21,7 +21,7 @@ public class ModRecipesProvider extends FabricRecipeProvider {
     }
 
     @Override
-    protected RecipeProvider createRecipeProvider(HolderLookup.Provider registries, RecipeOutput output) {
+    protected RecipeProvider createRecipeProvider(HolderLookup.Provider registries, BootstrapContext<Recipe<?>> recipes, BootstrapContext<Advancement> advancements) {
         return new RecipeProvider(registries, output) {
             @Override
             public void buildRecipes() {
@@ -58,8 +58,8 @@ public class ModRecipesProvider extends FabricRecipeProvider {
     }
 
 
-    }
     @Override
-    public String getName(){
+    public String getName() {
         return "Tournamentmod Recipes";
     }
+}
