@@ -45,6 +45,9 @@ public class ModItems {
         CreativeModeTabEvents.modifyOutputEvent(CreativeModeTabs.COMBAT).register(output -> {
             output.accept(WINGED_SWORD);
             output.accept(HAMMER);
+            output.accept(ICE_AXE);
+            output.accept(FLARE_GUN);
+            output.accept(FLARE);
                 }
 
                 );
