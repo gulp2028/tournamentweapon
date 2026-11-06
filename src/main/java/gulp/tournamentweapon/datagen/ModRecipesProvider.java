@@ -15,15 +15,21 @@ import net.minecraft.world.item.crafting.Recipe;
 import java.util.concurrent.CompletableFuture;
 
 public class ModRecipesProvider extends FabricRecipeProvider {
-
     public ModRecipesProvider(FabricPackOutput output, CompletableFuture<HolderLookup.Provider> registriesFuture) {
         super(output, registriesFuture);
     }
 
     @Override
-    protected RecipeProvider createRecipeProvider(HolderLookup.Provider registries, BootstrapContext<Recipe<?>> recipes, BootstrapContext<Advancement> advancements) {
-        return null;
+    protected RecipeProvider createRecipeProvider(HolderLookup.Provider registries,
+                                                  RecipeOutput output) {
+        return new RecipeProvider() {
+            @Override
+            public void buildRecipes() {
+
+            }
+        };
+
+
     }
 }
-
 

@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "",
+    "WR ",
+    "WWW"
+  ],
+  "key": {
+    "W": "#minecraft:logs",
+    "R": "minecraft:redstone"
+  },
+  "result": {
+    "id": "tutorial:custom_item",
+    "count": 4
+  }
+}
