@@ -1,5 +1,6 @@
 package gulp.tournamentweapon;
 
+import gulp.tournamentweapon.datagen.ModModelProvider;
 import gulp.tournamentweapon.datagen.ModRecipesProvider;
 import net.fabricmc.fabric.api.datagen.v1.DataGeneratorEntrypoint;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
@@ -9,6 +10,7 @@ public class TournamentweaponDataGenerator implements DataGeneratorEntrypoint {
 	public void onInitializeDataGenerator(FabricDataGenerator fabricDataGenerator) {
 		var pack = fabricDataGenerator.createPack();
 		pack.addProvider(ModRecipesProvider::new);
+		pack.addProvider(ModModelProvider::new);
 
 	}
 }
