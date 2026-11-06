@@ -22,14 +22,22 @@ public class ModRecipesProvider extends FabricRecipeProvider {
     @Override
     protected RecipeProvider createRecipeProvider(HolderLookup.Provider registries,
                                                   RecipeOutput output) {
-        return new RecipeProvider() {
+        return new RecipeProvider(registries, output) {
             @Override
             public void buildRecipes() {
+
 
             }
         };
 
 
+
+
+
+    }
+    @Override
+    public String getName(){
+        return "Tournamentweapon Recipes";
     }
 }
 
