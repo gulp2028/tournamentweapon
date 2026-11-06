@@ -11,6 +11,7 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.Item;
 
@@ -42,15 +43,23 @@ public class ModItems {
 
     public static void registerModItems() {
         Tournamentweapon.LOGGER.info("Registering Mod Items for " + Tournamentweapon.MOD_ID);
+        CreativeModeTabEvents.modifyOutputEvent(CreativeModeTabs.INGREDIENTS).register(output -> {
+                    output.accept(ICIUM);
+                    output.accept(SHORTIUM);
+                    output.accept(UPSIDEDOWNIUM);
+                });
+
+
         CreativeModeTabEvents.modifyOutputEvent(CreativeModeTabs.COMBAT).register(output -> {
             output.accept(WINGED_SWORD);
             output.accept(HAMMER);
             output.accept(ICE_AXE);
             output.accept(FLARE_GUN);
             output.accept(FLARE);
-                }
+                });
 
-                );
+
+
 
     }
 }
