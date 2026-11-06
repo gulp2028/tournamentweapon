@@ -1,16 +1,15 @@
 {
   "type": "minecraft:crafting_shaped",
   "pattern": [
-    "WWW",
-    "WR ",
-    "WWW"
+    "SS",
+    "II"
   ],
   "key": {
-    "W": "#minecraft:logs",
-    "R": "minecraft:redstone"
+    "S": "minecraft:stone_bricks",
+    "I": "minecraft:iron_ingot"
   },
   "result": {
-    "id": "tutorial:custom_item",
-    "count": 4
+    "id": "tournamentweapon:shortium",
+    "count": 1
   }
 }
