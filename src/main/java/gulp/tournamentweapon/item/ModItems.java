@@ -14,6 +14,8 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.equipment.ArmorMaterial;
+import net.minecraft.world.item.equipment.ArmorType;
 
 import java.util.function.Function;
 
@@ -33,6 +35,8 @@ public class ModItems {
             properties -> new Ice_AxeItem(properties.axe(ModToolMaterials.ICIUM,
                     2, -2)));
     public static final Item FLARE = registerItem("flare", Item::new);
+    //public static final Item BUTTERFLY_BOOTS = registerItem("butterfly_boots",
+    //        (new Item.Properties()).humanoidArmor(ModArmorMaterials.SHORTIUM, ArmorType.BOOTS));
 
 
 
@@ -56,7 +60,7 @@ public class ModItems {
             output.accept(ICE_AXE);
             output.accept(FLARE_GUN);
             output.accept(FLARE);
-                });
+        });
 
 
 

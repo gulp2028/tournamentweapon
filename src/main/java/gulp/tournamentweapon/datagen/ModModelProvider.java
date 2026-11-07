@@ -27,6 +27,6 @@ public class ModModelProvider extends FabricModelProvider {
         itemModelGenerators.generateFlatItem(ModItems.HAMMER, ModelTemplates.FLAT_HANDHELD_ITEM);
         itemModelGenerators.generateFlatItem(ModItems.FLARE, ModelTemplates.FLAT_ITEM);
         itemModelGenerators.generateFlatItem(ModItems.FLARE_GUN, ModelTemplates.CROSSBOW);
-        itemModelGenerators.generateFlatItem(ModItems.ICE_AXE, ModelTemplates.SPEAR_IN_HAND);
+        itemModelGenerators.generateSpear(ModItems.ICE_AXE);
     }
 }
