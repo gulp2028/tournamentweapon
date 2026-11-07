@@ -1,10 +1,7 @@
 package gulp.tournamentweapon.item;
 
 import gulp.tournamentweapon.Tournamentweapon;
-import gulp.tournamentweapon.item.custom.Flare_GunItem;
-import gulp.tournamentweapon.item.custom.HammerItem;
-import gulp.tournamentweapon.item.custom.Ice_AxeItem;
-import gulp.tournamentweapon.item.custom.Winged_SwordItem;
+import gulp.tournamentweapon.item.custom.*;
 import net.fabricmc.fabric.api.creativetab.v1.CreativeModeTabEvents;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -34,7 +31,8 @@ public class ModItems {
     public static final Item ICE_AXE = registerItem("ice_axe",
             properties -> new Ice_AxeItem(properties.axe(ModToolMaterials.ICIUM,
                     2, -2)));
-    public static final Item FLARE = registerItem("flare", Item::new);
+    public static final Item FLARE = registerItem("flare",
+            properties -> new FlareItem(properties));
     //public static final Item BUTTERFLY_BOOTS = registerItem("butterfly_boots",
     //        (new Item.Properties()).humanoidArmor(ModArmorMaterials.SHORTIUM, ArmorType.BOOTS));
 
