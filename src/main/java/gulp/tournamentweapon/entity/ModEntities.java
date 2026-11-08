@@ -16,7 +16,7 @@ public class ModEntities {
             Identifier.fromNamespaceAndPath(Tournamentweapon.MOD_ID, "flare_entity"));
     public static final EntityType<FlareEntity> FLARE = Registry.register(BuiltInRegistries.ENTITY_TYPE,
             Identifier.fromNamespaceAndPath(Tournamentweapon.MOD_ID, "flare_entity"),
-            EntityType.Builder.of(FlareEntity::new, MobCategory.MISC).sized(0.25, 0.25));
+            EntityType.Builder.of(FlareEntity::new, MobCategory.MISC).sized(0.5F, 0.5F));
 
 
 

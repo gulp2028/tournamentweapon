@@ -14,13 +14,9 @@ import net.minecraft.world.phys.EntityHitResult;
 import org.jspecify.annotations.Nullable;
 
 public class FlareEntity extends AbstractArrow {
-    public FlareEntity(EntityType<? extends AbstractArrow> type, Level level) {
-        super(type, level);
 
-    }
-
-    public FlareEntity(Level level, LivingEntity owner, ItemStack itemStack, @Nullable ItemStack firedfromweapon) {
-        super(level, owner, itemStack, firedfromweapon);
+    public FlareEntity(EntityType<? extends FlareEntity> entityType, Level level){
+        super(entityType, level);
     }
 
 
