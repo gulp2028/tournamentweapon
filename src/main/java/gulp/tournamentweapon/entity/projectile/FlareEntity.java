@@ -19,21 +19,18 @@ import org.jspecify.annotations.Nullable;
 
 public class FlareEntity extends AbstractFlare {
 
-    public FlareEntity(final EntityType<? extends FlareEntity> type, final Level level) {
-        super(type, level);
+
+    protected FlareEntity(EntityType<? extends AbstractFlare> type, Level level, ItemStack pickupItemStack) {
+        super(type, level, pickupItemStack);
     }
 
-    public FlareEntity(final Level level, final double x, final double y, final double z, final ItemStack pickupItemStack, final @Nullable ItemStack firedFromWeapon) {
-        super(ModEntityTypes.FLARE, x, y, z, level, pickupItemStack, firedFromWeapon);
-
+    protected FlareEntity(EntityType<? extends AbstractFlare> type, double x, double y, double z, Level level, ItemStack pickupItemStack, ItemStack pickupItemStack1, @Nullable ItemStack firedFromWeapon) {
+        super(type, x, y, z, level, pickupItemStack, pickupItemStack1, firedFromWeapon);
     }
 
-    public FlareEntity(final Level level, final LivingEntity owner, final ItemStack pickupItemStack, final @Nullable ItemStack firedFromWeapon) {
-        super(ModEntityTypes.FLARE, owner, level, pickupItemStack, firedFromWeapon);
+    protected FlareEntity(EntityType<? extends AbstractFlare> type, LivingEntity mob, Level level, ItemStack pickupItemStack, @Nullable ItemStack firedFromWeapon, ItemStack pickupItemStack1) {
+        super(type, mob, level, pickupItemStack, firedFromWeapon, pickupItemStack1);
     }
-
-
-
 }
 
 
