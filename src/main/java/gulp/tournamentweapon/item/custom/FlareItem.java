@@ -14,8 +14,8 @@ public class FlareItem extends Item {
     public FlareItem(Properties properties){
         super(properties);}
 
-    //public FlareEntity createFlare(Level level, ItemStack itemStack, LivingEntity owner, Direction direction, @Nullable ItemStack firedfromweapon){
-    //    return new FlareEntity(level, owner, itemStack.copyWithCount(1), firedfromweapon);
+    public FlareEntity createFlare(Level level, ItemStack itemStack, LivingEntity owner, Direction direction, @Nullable ItemStack firedfromweapon){
+        return new FlareEntity(level, owner, itemStack.copyWithCount(1), firedfromweapon);
 
-    //}
+    }
 }
