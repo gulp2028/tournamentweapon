@@ -28,26 +28,7 @@ public class Flare_GunItem extends CrossbowItem {
     public Predicate<ItemStack> getSupportedHeldProjectiles() {
         return itemStack -> itemStack.is(ModItemTags.FLARE_ONLY);
     }
-    protected Projectile createProjectile(final Level level, final LivingEntity shooter, final ItemStack weapon, final ItemStack projectile, final boolean isCrit) {
-        Item flareitem = projectile.getItem();
-
-
-        FlareEntity flare = arrowItem.createFlare(level, projectile, shooter, weapon);
-        if (isCrit) {
-            arrow.setCritArrow(true);
-        }
-        return arrow;}}
-
-@Override
-protected Projectile createProjectile(final Level level, final LivingEntity shooter, final ItemStack heldItem, final ItemStack projectile, final boolean isCrit) {
-    Projectile projectileEntity = super.createProjectile(level, shooter, heldItem, projectile, isCrit);
-    if (projectileEntity instanceof FlareEntity) {
-        FlareEntity flare = (FlareEntity) projectileEntity;
-        flare.setSoundEvent(SoundEvents.CROSSBOW_HIT);
-    }
-    return projectileEntity;
 }
-    }
 
 
 
