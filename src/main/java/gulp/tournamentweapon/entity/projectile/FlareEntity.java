@@ -1,6 +1,7 @@
 package gulp.tournamentweapon.entity.projectile;
 
 
+import gulp.tournamentweapon.entity.ModEntityTypes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
@@ -20,7 +21,7 @@ public class FlareEntity extends AbstractArrow {
     }
 
     public FlareEntity(Level level, LivingEntity owner, ItemStack itemStack) {
-        super(ModEntityTypes.FLARE_ENTITY, owner, level, itemStack);
+        super(ModEntityTypes.FLARE, level);
     }
 
 

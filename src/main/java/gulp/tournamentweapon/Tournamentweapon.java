@@ -1,6 +1,7 @@
 package gulp.tournamentweapon;
 
 import gulp.tournamentweapon.entity.ModEntities;
+import gulp.tournamentweapon.entity.ModEntityTypes;
 import gulp.tournamentweapon.item.ModItems;
 import net.fabricmc.api.ModInitializer;
 
@@ -17,6 +18,7 @@ public class Tournamentweapon implements ModInitializer {
 	public void onInitialize() {
 		ModItems.registerModItems();
 		ModEntities.registerModEntities();
+		ModEntityTypes.initialize();
 
 
 		LOGGER.info("Hello Fabric world!");
