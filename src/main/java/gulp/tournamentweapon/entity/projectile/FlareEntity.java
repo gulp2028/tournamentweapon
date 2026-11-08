@@ -31,6 +31,14 @@ public class FlareEntity extends AbstractFlare {
     protected FlareEntity(EntityType<? extends AbstractFlare> type, LivingEntity mob, Level level, ItemStack pickupItemStack, @Nullable ItemStack firedFromWeapon, ItemStack pickupItemStack1) {
         super(type, mob, level, pickupItemStack, firedFromWeapon, pickupItemStack1);
     }
+
+    public <T extends Entity> FlareEntity(EntityType<T> tEntityType, Level level) {
+        super(tEntityType, level);
+}
+
+    public FlareEntity(Level level, LivingEntity owner, ItemStack itemStack, @Nullable ItemStack firedfromweapon) {
+        super(level, owner, itemStack, firedfromweapon);
+    }
 }
 
 
