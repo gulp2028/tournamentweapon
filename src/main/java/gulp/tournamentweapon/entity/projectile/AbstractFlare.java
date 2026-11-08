@@ -16,5 +16,17 @@ import net.minecraft.world.phys.EntityHitResult;
 import org.jspecify.annotations.Nullable;
 
 public class AbstractFlare extends Projectile {
+    private static double BASE_FLARE_DAMAGE = (double) 2.5F;
+
+
+    protected AbstractFlare(final EntityType<? extends AbstractFlare> type, final Level level) {
+        super(type, level);
+        this.baseDamage = (double)2.0F;
+        this.soundEvent = this.getDefaultHitGroundSoundEvent();
+        this.firedFromWeapon = null;
+    }
+
+
+}
 
 
