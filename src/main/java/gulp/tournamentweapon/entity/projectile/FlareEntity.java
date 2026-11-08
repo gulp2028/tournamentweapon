@@ -35,39 +35,6 @@ public class FlareEntity extends AbstractHurtingProjectile {
     }
 
 
-    @Override
-    protected void onHitBlock(BlockHitResult hitResult){
-        super.onHitBlock(hitResult);
-        Level level = level();
-        if(!level.isClientSide()) {
-            BlockPos pos =  hitResult.getBlockPos().relative(hitResult.getDirection());
-            if (level.isEmptyBlock(pos)) {
-                level.setBlockAndUpdate(pos, BaseFireBlock.getState(level,pos));
-            }
-        }
-    }
 
-
-    @Override
-    protected ItemStack getDefaultPickupItem() {
-        return null;
-    }
-    @Override
-    protected float getAirDrag() {
-        return 0.999F;
-    }
-    @Override
-    protected double getDefaultGravity(){
-        return 0.08;
-    }
-
-    @Override
-    public void onHitEntity(EntityHitResult hitResult) {
-        super.onHitEntity(hitResult);
-        Entity entity = hitResult.getEntity();
-        entity.igniteForSeconds(15);
-
-    }
-}
 
 

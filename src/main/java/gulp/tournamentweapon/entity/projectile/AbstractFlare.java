@@ -1,0 +1,51 @@
+package gulp.tournamentweapon.entity.projectile;
+
+import gulp.tournamentweapon.item.ModItems;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.projectile.arrow.AbstractArrow;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.BaseFireBlock;
+import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.EntityHitResult;
+
+public class AbstractFlare extends AbstractArrow {
+
+
+    @Override
+    protected void onHitBlock(BlockHitResult hitResult){
+        super.onHitBlock(hitResult);
+        Level level = level();
+        if(!level.isClientSide()) {
+            BlockPos pos =  hitResult.getBlockPos().relative(hitResult.getDirection());
+            if (level.isEmptyBlock(pos)) {
+                level.setBlockAndUpdate(pos, BaseFireBlock.getState(level,pos));
+            }
+        }
+    }
+
+    @Override
+    protected ItemStack getDefaultPickupItem() {
+        return new ItemStack(ModItems.FLARE);
+    }
+
+
+    @Override
+    protected float getAirDrag() {
+        return 0.999F;
+    }
+    @Override
+    protected double getDefaultGravity(){
+        return 0.08;
+    }
+
+    @Override
+    public void onHitEntity(EntityHitResult hitResult) {
+        super.onHitEntity(hitResult);
+        Entity entity = hitResult.getEntity();
+        entity.igniteForSeconds(15);
+
+    }
+}
+}
