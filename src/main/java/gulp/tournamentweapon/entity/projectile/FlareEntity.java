@@ -19,6 +19,10 @@ public class FlareEntity extends AbstractArrow {
         super(entityType, level);
     }
 
+    public FlareEntity(Level level, LivingEntity owner, ItemStack itemStack) {
+        super(ModEntityTypes.FLARE_ENTITY, owner, level, itemStack);
+    }
+
 
 
     @Override
