@@ -9,14 +9,16 @@ import net.minecraft.world.entity.MobCategory;
 
 import javax.swing.text.html.parser.Entity;
 
+
 public class ModEntityTypes {
     public static final EntityType<FlareEntity> FLARE = register(
-            ModEntityTypes.FLARE_ENTITY,
+            ModEntityTypeIds.FLARE_ENTITY,
             EntityType.Builder.<FlareEntity>of(FlareEntity::new, MobCategory.MISC)
             .sized(0.2F, 0.2F));
 
-    private static <T extends Entity> EntityType<T> register(ResourceKey<EntityType<?>> key, EntityType.Builder<T> builder) {
+    private static <T extends Entity> EntityType<FlareEntity> register(ResourceKey<EntityType<?>> key, EntityType.Builder<FlareEntity> builder) {
         return Registry.register(BuiltInRegistries.ENTITY_TYPE, key, builder.build(key));
     }
+
     public static void initialize(){}
 }
