@@ -23,16 +23,20 @@ public class ZephyrItem extends Item {
     @Override
     public void postHurtEnemy(ItemStack itemStack, LivingEntity target, LivingEntity attacker){
         if(bloodlevel == 0){
+            ragetime = 200;
             bloodlevel = 1;
             attacker.addEffect(new MobEffectInstance(MobEffects.SPEED, 60, 1));
 
         }else if(bloodlevel == 1){
+            ragetime = 200;
             bloodlevel = 2;
             attacker.addEffect(new MobEffectInstance(MobEffects.SPEED, 100, 2));
         }else if(bloodlevel == 2){
+            ragetime = 200;
             bloodlevel = 3;
             attacker.addEffect(new MobEffectInstance(MobEffects.SPEED, 150, 3));
         }else{
+            ragetime = 200;
             attacker.addEffect(new MobEffectInstance(MobEffects.SPEED, 200, 5));
             attacker.level().playSound(null, attacker.blockPosition(), SoundEvents.ANVIL_PLACE,
                     SoundSource.PLAYERS, 2.0f, 1f);
