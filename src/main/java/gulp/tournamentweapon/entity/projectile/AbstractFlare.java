@@ -31,7 +31,7 @@ import org.jspecify.annotations.Nullable;
 import java.util.List;
 
 public class AbstractFlare extends Projectile {
-    private static double BASE_FLARE_DAMAGE = (double) 2.5F;
+    private static final double ARROW_BASE_DAMAGE = (double)2.0F;
     private static final int SHAKE_TIME = 7;
     private static final float WATER_INERTIA = 0.6F;
     private static final float INERTIA = 0.99F;
@@ -40,6 +40,9 @@ public class AbstractFlare extends Projectile {
     private static final boolean DEFAULT_IN_GROUND = false;
     private static final boolean DEFAULT_CRIT = false;
     private static final byte DEFAULT_PIERCE_LEVEL = 0;
+    private static final EntityDataAccessor<Byte> ID_FLAGS;
+    private static final EntityDataAccessor<Byte> PIERCE_LEVEL;
+    private static final EntityDataAccessor<Boolean> IN_GROUND;
     private static final int FLAG_CRIT = 1;
     private static final int FLAG_NOPHYSICS = 2;
     private @Nullable BlockState lastState;
@@ -53,138 +56,5 @@ public class AbstractFlare extends Projectile {
     private @Nullable List<Entity> piercedAndKilledEntities;
     private ItemStack pickupItemStack;
     private @Nullable ItemStack firedFromWeapon;
-
-
-
-    protected AbstractFlare(final EntityType<? extends AbstractFlare> type, final Level level) {
-        super(type, level);
-        this.pickup = AbstractArrow.Pickup.DISALLOWED;
-        this.shakeTime = 0;
-        this.life = 0;
-        this.baseDamage = (double)2.0F;
-        this.soundEvent = this.getDefaultHitGroundSoundEvent();
-        this.pickupItemStack = this.getDefaultPickupItem();
-        this.firedFromWeapon = null;
-
-    }
-    protected AbstractFlare(final EntityType<? extends AbstractFlare> type, final double x, final double y, final double z, final Level level, final ItemStack pickupItemStack, final @Nullable ItemStack firedFromWeapon) {
-        this(type, level);
-
-        this.setPos(x, y, z);
-        if (firedFromWeapon != null && level instanceof ServerLevel serverLevel) {
-            if (firedFromWeapon.isEmpty()) {
-                throw new IllegalArgumentException("Invalid weapon firing a flare");}}
-
-    }
-
-    public void shoot(final double xd, final double yd, final double zd, final float pow, final float uncertainty) {
-        super.shoot(xd, yd, zd, pow, uncertainty);
-        this.life = 0;
-    }
-    public void lerpMotion(final Vec3 movement) {
-        super.lerpMotion(movement);
-        this.life = 0;
-
-    }
-
-    public void onSyncedDataUpdated(final EntityDataAccessor<?> accessor) {
-        super.onSyncedDataUpdated(accessor);
-
-    }
-
-    public void tick() {
-        boolean physicsEnabled = !this.isNoPhysics();
-        Vec3 movement = this.getDeltaMovement();
-        BlockPos blockPos = this.blockPosition();
-        BlockState blockState = this.level().getBlockState(blockPos);
-        if (!blockState.isAir() && physicsEnabled) {
-            VoxelShape shape = blockState.getCollisionShape(this.level(), blockPos);
-            if (!shape.isEmpty()) {
-                Vec3 position = this.position();
-
-                for(AABB aabb : shape.toAabbs()) {
-                    if (aabb.move(blockPos).contains(position)) {
-                        this.setDeltaMovement(Vec3.ZERO);
-                        this.setInGround(true);
-                        break;
-                    }
-                }
-            }
-        }
-
-        if (this.shakeTime > 0) {
-            --this.shakeTime;
-        }
-
-        if (this.isInWaterOrRain()) {
-            this.clearFire();
-        }
-
-        if (this.isInGround() && physicsEnabled) {
-            if (!this.level().isClientSide()) {
-                if (this.lastState != blockState && this.shouldFall()) {
-                    this.startFalling();
-                } else {
-                    this.tickDespawn();
-                }
-            }
-
-            ++this.inGroundTime;
-            if (this.isAlive()) {
-                this.applyEffectsFromBlocks();
-            }
-
-            if (!this.level().isClientSide()) {
-                this.setSharedFlagOnFire(this.getRemainingFireTicks() > 0);
-            }
-
-        } else {
-            this.inGroundTime = 0;
-            Vec3 originalPosition = this.position();
-            if (this.isInWater()) {
-                this.applyInertia(this.getWaterInertia());
-                this.addBubbleParticles(originalPosition);
-            }
-
-            if (this.isCritArrow()) {
-                for(int i = 0; i < 4; ++i) {
-                    this.level().addParticle(ParticleTypes.CRIT, originalPosition.x + movement.x * (double)i / (double)4.0F, originalPosition.y + movement.y * (double)i / (double)4.0F, originalPosition.z + movement.z * (double)i / (double)4.0F, -movement.x, -movement.y + 0.2, -movement.z);
-                }
-            }
-
-            float yRot;
-            if (!physicsEnabled) {
-                yRot = (float)(Mth.atan2(-movement.x, -movement.z) * (double)(180F / (float)Math.PI));
-            } else {
-                yRot = (float)(Mth.atan2(movement.x, movement.z) * (double)(180F / (float)Math.PI));
-            }
-
-            float xRot = (float)(Mth.atan2(movement.y, movement.horizontalDistance()) * (double)(180F / (float)Math.PI));
-            this.setXRot(lerpRotation(this.getXRot(), xRot));
-            this.setYRot(lerpRotation(this.getYRot(), yRot));
-            this.checkLeftOwner();
-            if (physicsEnabled) {
-                BlockHitResult blockHitResult = this.level().clipIncludingBorder(new ClipContext(originalPosition, originalPosition.add(movement), ClipContext.Block.COLLIDER, ClipContext.Fluid.NONE, this));
-                this.stepMoveAndHit(blockHitResult);
-            } else {
-                this.setPos(originalPosition.add(movement));
-                this.applyEffectsFromBlocks();
-            }
-
-            if (!this.isInWater()) {
-                this.applyInertia(this.getAirDrag());
-            }
-
-            if (physicsEnabled && !this.isInGround()) {
-                this.applyGravity();
-            }
-
-            super.tick();
-        }
-    }
-
-
-
 }
-
 
