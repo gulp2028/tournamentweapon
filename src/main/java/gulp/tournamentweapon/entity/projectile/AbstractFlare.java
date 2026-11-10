@@ -14,6 +14,7 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.projectile.Projectile;
+import net.minecraft.world.entity.projectile.ProjectileDeflection;
 import net.minecraft.world.entity.projectile.arrow.AbstractArrow;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
@@ -21,14 +22,11 @@ import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.BaseFireBlock;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.phys.AABB;
-import net.minecraft.world.phys.BlockHitResult;
-import net.minecraft.world.phys.EntityHitResult;
-import net.minecraft.world.phys.Vec3;
+import net.minecraft.world.phys.*;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jspecify.annotations.Nullable;
 
-import java.util.List;
+import java.util.*;
 
 public class AbstractFlare extends Projectile {
     private static final double ARROW_BASE_DAMAGE = (double) 2.0F;
@@ -156,6 +154,36 @@ public class AbstractFlare extends Projectile {
             super.tick();
         }
     }
+    protected float getAirDrag() {
+        return 0.99F;
+    }
+    private void stepMoveAndHit(final BlockHitResult blockHitResult) {
+        while(true) {
+            if (this.isAlive()) {
+                Vec3 initialPosition = this.position();
+                ArrayList<EntityHitResult> entitiesHit = new ArrayList(this.findHitEntities(initialPosition, blockHitResult.getLocation()));
+                entitiesHit.sort(Comparator.comparingDouble((c) -> initialPosition.distanceToSqr(c.getEntity().position())));
+                EntityHitResult firstEntityHit = entitiesHit.isEmpty() ? null : (EntityHitResult)entitiesHit.getFirst();
+                Vec3 nextLocation = ((HitResult) Objects.requireNonNullElse(firstEntityHit, blockHitResult)).getLocation();
+                this.setPos(nextLocation);
+                this.applyEffectsFromBlocks(initialPosition, nextLocation);
+                if (this.portalProcess != null && this.portalProcess.isInsidePortalThisTick()) {
+                    this.handlePortal();
+                }
+                if (entitiesHit.isEmpty()) {
+                    if (this.isAlive() && blockHitResult.getType() != HitResult.Type.MISS) {
+                        this.hitTargetOrDeflectSelf(blockHitResult);
+                        this.needsSync = true;
+                    }
+                }
+            }
+            return;}}
+    private void applyInertia(final float inertia) {
+        Vec3 movement = this.getDeltaMovement();
+        this.setDeltaMovement(movement.scale((double)inertia));
+    }
+
+
 
 
 }
