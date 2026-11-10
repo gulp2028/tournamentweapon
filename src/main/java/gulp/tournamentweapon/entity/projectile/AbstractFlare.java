@@ -1,22 +1,27 @@
 package gulp.tournamentweapon.entity.projectile;
 
+import com.google.common.collect.Lists;
 import gulp.tournamentweapon.item.ModItems;
 import it.unimi.dsi.fastutil.ints.IntOpenHashSet;
+import net.minecraft.advancements.triggers.CriteriaTriggers;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.network.protocol.game.ClientboundGameEventPacket;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.util.Mth;
 import net.minecraft.util.Unit;
+import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.MoverType;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.entity.projectile.ProjectileDeflection;
-import net.minecraft.world.entity.projectile.arrow.AbstractArrow;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.level.ClipContext;
@@ -30,7 +35,7 @@ import org.jspecify.annotations.Nullable;
 import java.util.*;
 
 public class AbstractFlare extends Projectile {
-    private static final double ARROW_BASE_DAMAGE = (double) 2.0F;
+    private static final double FLARE_BASE_DAMAGE = (double) 2.0F;
     private static final int SHAKE_TIME = 7;
     private static final float WATER_INERTIA = 0.6F;
     private static final float INERTIA = 0.99F;
@@ -46,7 +51,6 @@ public class AbstractFlare extends Projectile {
     private static final int FLAG_NOPHYSICS = 2;
     private @Nullable BlockState lastState;
     protected int inGroundTime;
-    public AbstractArrow.Pickup pickup;
     public int shakeTime;
     private int life;
     private double baseDamage;
@@ -82,11 +86,6 @@ public class AbstractFlare extends Projectile {
                 throw new IllegalArgumentException("Invalid weapon firing a flare");
             }
 
-            this.firedFromWeapon = firedFromWeapon.copy();
-            int pierceLevel = EnchantmentHelper.getPiercingCount(serverLevel, firedFromWeapon, this.pickupItemStack);
-            if (pierceLevel > 0) {
-                this.setPierceLevel((byte) pierceLevel);
-            }
         }
     }
 
@@ -227,6 +226,89 @@ public class AbstractFlare extends Projectile {
     }
     protected boolean isInGround() {
         return (Boolean)this.entityData.get(IN_GROUND);
+    }
+
+    protected void onHitEntity(final EntityHitResult hitResult) {
+        super.onHitEntity(hitResult);
+        Entity entity = hitResult.getEntity();
+        float pow = (float)this.getDeltaMovement().length();
+        double flareDamage = this.baseDamage;
+        Entity currentOwner = this.getOwner();
+        DamageSource damageSource = this.damageSources().arrow(this, (Entity)(currentOwner != null ? currentOwner : this));
+        if (this.getWeaponItem() != null) {
+            Level var9 = this.level();
+            if (var9 instanceof ServerLevel) {
+                ServerLevel serverLevel = (ServerLevel)var9;
+                flareDamage = (double)EnchantmentHelper.modifyDamage(serverLevel, this.getWeaponItem(), entity, damageSource, (float)flareDamage);
+            }
+        }
+
+        int damage = Mth.ceil(Mth.clamp((double)pow * flareDamage, (double)0.0F, (double)Integer.MAX_VALUE));
+
+
+        if (currentOwner instanceof LivingEntity livingOwner) {
+            livingOwner.setLastHurtMob(entity);
+        }
+
+        int remainingFireTicks = entity.getRemainingFireTicks();
+        if (this.isOnFire()) {
+            entity.igniteForSeconds(5.0F);
+        }
+
+        if (entity.hurtOrSimulate(damageSource, (float)damage)) {
+            if (entity instanceof LivingEntity) {
+                LivingEntity mob = (LivingEntity)entity;
+
+
+                this.doKnockback(mob, damageSource);
+                Level var12 = this.level();
+                if (var12 instanceof ServerLevel) {
+                    ServerLevel serverLevel = (ServerLevel)var12;
+                    EnchantmentHelper.doPostAttackEffectsWithItemSource(serverLevel, mob, damageSource, this.getWeaponItem());
+                }
+
+                this.doPostHurtEffects(mob);
+                if (mob instanceof Player && currentOwner instanceof ServerPlayer) {
+                    ServerPlayer ownerPlayer = (ServerPlayer)currentOwner;
+                    if (!this.isSilent() && mob != ownerPlayer) {
+                        ownerPlayer.connection.send(new ClientboundGameEventPacket(ClientboundGameEventPacket.PLAY_ARROW_HIT_SOUND, 0.0F));
+                    }
+                }
+
+                if (!entity.isAlive() && this.piercedAndKilledEntities != null) {
+                    this.piercedAndKilledEntities.add(mob);
+                }
+
+                if (!this.level().isClientSide() && currentOwner instanceof ServerPlayer) {
+                    ServerPlayer player = (ServerPlayer)currentOwner;
+                    if (this.piercedAndKilledEntities != null) {
+                        CriteriaTriggers.KILLED_BY_ARROW.trigger(player, this.piercedAndKilledEntities, this.firedFromWeapon);
+                    } else if (!entity.isAlive()) {
+                        CriteriaTriggers.KILLED_BY_ARROW.trigger(player, List.of(entity), this.firedFromWeapon);
+                    }
+                }
+            }
+
+            this.playSound(this.soundEvent, 1.0F, 1.2F / (this.random.nextFloat() * 0.2F + 0.9F));
+            if (this.getPierceLevel() <= 0) {
+                this.discard();
+            }
+        } else if (entity.projectileReceivesSideEffectsOnHit(false)) {
+            entity.setRemainingFireTicks(remainingFireTicks);
+            this.deflect(ProjectileDeflection.REVERSE, entity, this.owner, false, 0.2);
+            Level var20 = this.level();
+            if (var20 instanceof ServerLevel) {
+                ServerLevel level = (ServerLevel)var20;
+                if (this.getDeltaMovement().lengthSqr() < 1.0E-7) {
+                    if (this.pickup == AbstractArrow.Pickup.ALLOWED) {
+                        this.spawnAtLocation(level, this.getPickupItem(), 0.1F);
+                    }
+
+                    this.discard();
+                }
+            }
+        }
+
     }
 
 
