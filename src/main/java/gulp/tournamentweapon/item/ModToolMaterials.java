@@ -10,5 +10,6 @@ public class ModToolMaterials {
             1200, 5f, 5f, 20, ModTags.Items.SHORTIUM_REPAIR);
     public static final ToolMaterial ICIUM = new ToolMaterial(ModTags.Blocks.INCORRECT_FOR_ICIUM_TOOL,
             1200, 5f, 4f, 20, ModTags.Items.ICIUM_REPAIR);
-
+    public static final ToolMaterial STIRLITE = new ToolMaterial(ModTags.Blocks.INCORRECT_FOR_STIRLITE_TOOL,
+            1200, 5f, 4f, 20, ModTags.Items.STIRLITE_REPAIR);
 }

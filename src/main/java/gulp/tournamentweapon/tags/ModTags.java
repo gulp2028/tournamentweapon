@@ -13,6 +13,11 @@ public class ModTags {
                 createTag("needs_upsidedownium_tool");
         public static final TagKey<Block> INCORRECT_FOR_UPSIDEDOWNIUM_TOOL =
                 createTag("incorrect_for_upsidedownium_tool");
+        public static final TagKey<Block> NEEDS_STIRLITE_TOOL =
+                createTag("needs_stirlite_tool");
+
+        public static final TagKey<Block> INCORRECT_FOR_STIRLITE_TOOL =
+                createTag("incorrect_for_stirlite_tool");
         public static final TagKey<Block> SHORTIUM_TOOL =
                 createTag("needs_shortium_tool");
         public static final TagKey<Block> INCORRECT_FOR_SHORTIUM_TOOL =
@@ -33,6 +38,8 @@ public class ModTags {
                 createTag("shortium_repair");
         public static final TagKey<Item> ICIUM_REPAIR =
                 createTag("icium_repair");
+        public static final TagKey<Item> STIRLITE_REPAIR =
+                createTag("stirlite_repair");
 
         private static TagKey<Item> createTag(String name) {
             return TagKey.create(Registries.ITEM, Identifier.fromNamespaceAndPath(Tournamentweapon.MOD_ID, name));
