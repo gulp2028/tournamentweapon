@@ -92,6 +92,10 @@ public class AbstractFlare extends Projectile {
     public void setSoundEvent(final SoundEvent soundEvent) {
         this.soundEvent = soundEvent;
     }
+    public void shoot(final double xd, final double yd, final double zd, final float pow, final float uncertainty) {
+        super.shoot(xd, yd, zd, pow, uncertainty);
+        this.life = 0;
+    }
 
 
 
