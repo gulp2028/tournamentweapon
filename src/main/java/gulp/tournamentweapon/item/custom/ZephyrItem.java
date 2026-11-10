@@ -1,13 +1,17 @@
 package gulp.tournamentweapon.item.custom;
 
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import org.jspecify.annotations.Nullable;
 
 public class ZephyrItem extends Item {
     private int bloodlevel = 0;
@@ -22,10 +26,10 @@ public class ZephyrItem extends Item {
             bloodlevel = 1;
             attacker.addEffect(new MobEffectInstance(MobEffects.SPEED, 60, 1));
 
-        }if(bloodlevel == 1){
+        }else if(bloodlevel == 1){
             bloodlevel = 2;
             attacker.addEffect(new MobEffectInstance(MobEffects.SPEED, 100, 2));
-        }if(bloodlevel == 2){
+        }else if(bloodlevel == 2){
             bloodlevel = 3;
             attacker.addEffect(new MobEffectInstance(MobEffects.SPEED, 150, 3));
         }else{
@@ -33,7 +37,17 @@ public class ZephyrItem extends Item {
             attacker.level().playSound(null, attacker.blockPosition(), SoundEvents.ANVIL_PLACE,
                     SoundSource.PLAYERS, 2.0f, 1f);
         }
+    }
+    @Override
+    public void inventoryTick(ItemStack itemStack, ServerLevel level, Entity owner, @Nullable EquipmentSlot slot) {
+        super.inventoryTick(itemStack, level, owner, slot);
+        if(ragetime>0) {
+            ragetime--;
+        }
+        if(ragetime == 0){
+            bloodlevel = 0;
 
+        }
     }
 
 }
