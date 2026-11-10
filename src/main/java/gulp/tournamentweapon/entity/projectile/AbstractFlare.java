@@ -110,6 +110,52 @@ public class AbstractFlare extends Projectile {
     public void onSyncedDataUpdated(final EntityDataAccessor<?> accessor) {
         super.onSyncedDataUpdated(accessor);
     }
+    public void tick() {
+        boolean physicsEnabled = !this.isNoPhysics();
+        Vec3 movement = this.getDeltaMovement();
+        BlockPos blockPos = this.blockPosition();
+        BlockState blockState = this.level().getBlockState(blockPos);
+        if (this.shakeTime > 0) {
+            --this.shakeTime;
+        }
+        else {
+            this.inGroundTime = 0;
+            Vec3 originalPosition = this.position();
+            if (this.isInWater()) {
+                this.applyInertia(this.getWaterInertia());
+                this.addBubbleParticles(originalPosition);
+            }
+
+            float yRot;
+            if (!physicsEnabled) {
+                yRot = (float)(Mth.atan2(-movement.x, -movement.z) * (double)(180F / (float)Math.PI));
+            } else {
+                yRot = (float)(Mth.atan2(movement.x, movement.z) * (double)(180F / (float)Math.PI));
+            }
+
+            float xRot = (float)(Mth.atan2(movement.y, movement.horizontalDistance()) * (double)(180F / (float)Math.PI));
+            this.setXRot(lerpRotation(this.getXRot(), xRot));
+            this.setYRot(lerpRotation(this.getYRot(), yRot));
+            this.checkLeftOwner();
+            if (physicsEnabled) {
+                BlockHitResult blockHitResult = this.level().clipIncludingBorder(new ClipContext(originalPosition, originalPosition.add(movement), ClipContext.Block.COLLIDER, ClipContext.Fluid.NONE, this));
+                this.stepMoveAndHit(blockHitResult);
+            } else {
+                this.setPos(originalPosition.add(movement));
+                this.applyEffectsFromBlocks();
+            }
+
+            if (!this.isInWater()) {
+                this.applyInertia(this.getAirDrag());
+            }
+
+            if (physicsEnabled && !this.isInGround()) {
+                this.applyGravity();
+            }
+
+            super.tick();
+        }
+    }
 
 
 }
