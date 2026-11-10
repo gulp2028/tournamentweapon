@@ -13,6 +13,7 @@ import net.minecraft.util.Unit;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.MoverType;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.entity.projectile.ProjectileDeflection;
 import net.minecraft.world.entity.projectile.arrow.AbstractArrow;
@@ -182,6 +183,52 @@ public class AbstractFlare extends Projectile {
         Vec3 movement = this.getDeltaMovement();
         this.setDeltaMovement(movement.scale((double)inertia));
     }
+    private void addBubbleParticles(final Vec3 position) {
+        Vec3 movement = this.getDeltaMovement();
+
+        for(int i = 0; i < 4; ++i) {
+            float s = 0.25F;
+            this.level().addParticle(ParticleTypes.BUBBLE, position.x - movement.x * (double)0.25F, position.y - movement.y * (double)0.25F, position.z - movement.z * (double)0.25F, movement.x, movement.y, movement.z);
+        }
+
+    }
+
+    protected double getDefaultGravity() {
+        return 0.1;
+    }
+
+    public void move(final MoverType moverType, final Vec3 delta) {
+        super.move(moverType, delta);
+        if (moverType != MoverType.SELF && this.shouldFall()) {
+            this.startFalling();
+        }
+
+    }
+    public void onItemBreak(final ItemStack item) {
+        this.firedFromWeapon = null;
+    }
+
+    public void onAboveBubbleColumn(final boolean dragDown, final BlockPos pos) {
+        if (!this.isInGround()) {
+            super.onAboveBubbleColumn(dragDown, pos);
+        }
+    }
+
+    public void onInsideBubbleColumn(final boolean dragDown) {
+        if (!this.isInGround()) {
+            super.onInsideBubbleColumn(dragDown);
+        }
+    }
+
+    public void push(final double xa, final double ya, final double za) {
+        if (!this.isInGround()) {
+            super.push(xa, ya, za);
+        }
+    }
+    protected boolean isInGround() {
+        return (Boolean)this.entityData.get(IN_GROUND);
+    }
+
 
 
 
