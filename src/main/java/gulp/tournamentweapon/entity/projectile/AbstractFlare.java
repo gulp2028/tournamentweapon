@@ -59,14 +59,34 @@ public class AbstractFlare extends Projectile {
 
 
 
-    protected AbstractArrow(final EntityType<? extends AbstractArrow> type, final Level level) {
+    protected AbstractFlare(final EntityType<? extends AbstractFlare> type, final Level level) {
         super(type, level);
-        this.pickup = AbstractArrow.Pickup.DISALLOWED;
         this.shakeTime = 0;
         this.life = 0;
         this.baseDamage = (double)2.0F;
         this.soundEvent = this.getDefaultHitGroundSoundEvent();
         this.firedFromWeapon = null;
     }
+    protected AbstractFlare(final EntityType<? extends AbstractFlare> type, final double x, final double y, final double z, final Level level, final ItemStack pickupItemStack, final @Nullable ItemStack firedFromWeapon) {
+        this(type, level);
+        this.applyComponentsFromItemStack(pickupItemStack);
+
+
+        this.setPos(x, y, z);
+        if (firedFromWeapon != null && level instanceof ServerLevel serverLevel) {
+            if (firedFromWeapon.isEmpty()) {
+                throw new IllegalArgumentException("Invalid weapon firing an arrow");
+            }
+
+            this.firedFromWeapon = firedFromWeapon.copy();
+            int pierceLevel = EnchantmentHelper.getPiercingCount(serverLevel, firedFromWeapon, this.pickupItemStack);
+            if (pierceLevel > 0) {
+                this.setPierceLevel((byte)pierceLevel);
+            }
+        }
+}
+
+
+
 }
 
