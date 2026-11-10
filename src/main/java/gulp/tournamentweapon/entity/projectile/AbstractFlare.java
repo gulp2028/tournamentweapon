@@ -85,10 +85,13 @@ public class AbstractFlare extends Projectile {
             this.firedFromWeapon = firedFromWeapon.copy();
             int pierceLevel = EnchantmentHelper.getPiercingCount(serverLevel, firedFromWeapon, this.pickupItemStack);
             if (pierceLevel > 0) {
-                this.setPierceLevel((byte)pierceLevel);
+                this.setPierceLevel((byte) pierceLevel);
             }
         }
-}
+    }
+    public void setSoundEvent(final SoundEvent soundEvent) {
+        this.soundEvent = soundEvent;
+    }
 
 
 
