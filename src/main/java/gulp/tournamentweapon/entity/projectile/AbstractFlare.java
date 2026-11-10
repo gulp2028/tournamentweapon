@@ -67,6 +67,10 @@ public class AbstractFlare extends Projectile {
         this.soundEvent = this.getDefaultHitGroundSoundEvent();
         this.firedFromWeapon = null;
     }
+    protected AbstractFlare(final EntityType<? extends AbstractFlare> type, final LivingEntity mob, final Level level, final ItemStack pickupItemStack, final @Nullable ItemStack firedFromWeapon) {
+        this(type, mob.getX(), mob.getEyeY() - (double)0.1F, mob.getZ(), level, pickupItemStack, firedFromWeapon);
+        this.setOwner(mob);
+    }
     protected AbstractFlare(final EntityType<? extends AbstractFlare> type, final double x, final double y, final double z, final Level level, final ItemStack pickupItemStack, final @Nullable ItemStack firedFromWeapon) {
         this(type, level);
         this.applyComponentsFromItemStack(pickupItemStack);
@@ -75,7 +79,7 @@ public class AbstractFlare extends Projectile {
         this.setPos(x, y, z);
         if (firedFromWeapon != null && level instanceof ServerLevel serverLevel) {
             if (firedFromWeapon.isEmpty()) {
-                throw new IllegalArgumentException("Invalid weapon firing an arrow");
+                throw new IllegalArgumentException("Invalid weapon firing a flare");
             }
 
             this.firedFromWeapon = firedFromWeapon.copy();
