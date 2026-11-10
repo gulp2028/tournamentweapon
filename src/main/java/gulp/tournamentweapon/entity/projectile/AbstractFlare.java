@@ -56,5 +56,17 @@ public class AbstractFlare extends Projectile {
     private @Nullable List<Entity> piercedAndKilledEntities;
     private ItemStack pickupItemStack;
     private @Nullable ItemStack firedFromWeapon;
+
+
+
+    protected AbstractArrow(final EntityType<? extends AbstractArrow> type, final Level level) {
+        super(type, level);
+        this.pickup = AbstractArrow.Pickup.DISALLOWED;
+        this.shakeTime = 0;
+        this.life = 0;
+        this.baseDamage = (double)2.0F;
+        this.soundEvent = this.getDefaultHitGroundSoundEvent();
+        this.firedFromWeapon = null;
+    }
 }
 
