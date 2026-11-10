@@ -36,7 +36,8 @@ public class ModItems {
     //public static final Item BUTTERFLY_BOOTS = registerItem("butterfly_boots",
     //        (new Item.Properties()).humanoidArmor(ModArmorMaterials.SHORTIUM, ArmorType.BOOTS));
     public static final Item ZEPHYR = registerItem("zepyhr",
-            properties -> new ZephyrItem(properties.sword(ModToolMaterials.STIRLITE)));
+            properties -> new ZephyrItem(properties.sword(ModToolMaterials.STIRLITE,
+                    4, -2)));
 
 
 
