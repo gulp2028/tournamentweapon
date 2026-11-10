@@ -31,7 +31,7 @@ import org.jspecify.annotations.Nullable;
 import java.util.List;
 
 public class AbstractFlare extends Projectile {
-    private static final double ARROW_BASE_DAMAGE = (double)2.0F;
+    private static final double ARROW_BASE_DAMAGE = (double) 2.0F;
     private static final int SHAKE_TIME = 7;
     private static final float WATER_INERTIA = 0.6F;
     private static final float INERTIA = 0.99F;
@@ -58,19 +58,20 @@ public class AbstractFlare extends Projectile {
     private @Nullable ItemStack firedFromWeapon;
 
 
-
     protected AbstractFlare(final EntityType<? extends AbstractFlare> type, final Level level) {
         super(type, level);
         this.shakeTime = 0;
         this.life = 0;
-        this.baseDamage = (double)2.0F;
+        this.baseDamage = (double) 2.0F;
         this.soundEvent = this.getDefaultHitGroundSoundEvent();
         this.firedFromWeapon = null;
     }
+
     protected AbstractFlare(final EntityType<? extends AbstractFlare> type, final LivingEntity mob, final Level level, final ItemStack pickupItemStack, final @Nullable ItemStack firedFromWeapon) {
-        this(type, mob.getX(), mob.getEyeY() - (double)0.1F, mob.getZ(), level, pickupItemStack, firedFromWeapon);
+        this(type, mob.getX(), mob.getEyeY() - (double) 0.1F, mob.getZ(), level, pickupItemStack, firedFromWeapon);
         this.setOwner(mob);
     }
+
     protected AbstractFlare(final EntityType<? extends AbstractFlare> type, final double x, final double y, final double z, final Level level, final ItemStack pickupItemStack, final @Nullable ItemStack firedFromWeapon) {
         this(type, level);
         this.applyComponentsFromItemStack(pickupItemStack);
@@ -89,15 +90,31 @@ public class AbstractFlare extends Projectile {
             }
         }
     }
+
     public void setSoundEvent(final SoundEvent soundEvent) {
         this.soundEvent = soundEvent;
     }
+
     public void shoot(final double xd, final double yd, final double zd, final float pow, final float uncertainty) {
         super.shoot(xd, yd, zd, pow, uncertainty);
         this.life = 0;
     }
 
+    public void lerpMotion(final Vec3 movement) {
+        super.lerpMotion(movement);
+        this.life = 0;
+
+
+    }
+
+    public void onSyncedDataUpdated(final EntityDataAccessor<?> accessor) {
+        super.onSyncedDataUpdated(accessor);
+    }
 
 
 }
+
+
+
+
 
