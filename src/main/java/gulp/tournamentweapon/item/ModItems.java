@@ -19,6 +19,7 @@ import java.util.function.Function;
 public class ModItems {
     public static final Item UPSIDEDOWNIUM = registerItem("upsidedownium", Item::new);
     public static final Item ICIUM = registerItem("icium", Item::new);
+    public static final Item STIRLITE = registerItem("stirlite", Item::new);
     public static final Item SHORTIUM = registerItem("shortium", Item::new);
     public static final Item WINGED_SWORD = registerItem("winged_sword",
             properties -> new Winged_SwordItem(properties.sword(ModToolMaterials.UPSIDEDOWNIUM,
@@ -52,6 +53,7 @@ public class ModItems {
                     output.accept(ICIUM);
                     output.accept(SHORTIUM);
                     output.accept(UPSIDEDOWNIUM);
+                    output.accept(STIRLITE);
                 });
 
 
@@ -61,6 +63,7 @@ public class ModItems {
             output.accept(ICE_AXE);
             output.accept(FLARE_GUN);
             output.accept(FLARE);
+            output.accept(ZEPHYR);
         });
 
 
