@@ -19,27 +19,25 @@ import org.jspecify.annotations.Nullable;
 
 public class FlareEntity extends AbstractFlare {
 
-
-    protected FlareEntity(EntityType<? extends AbstractFlare> type, Level level, ItemStack pickupItemStack) {
-        super(type, level, pickupItemStack);
+    protected FlareEntity(EntityType<? extends AbstractArrow> type, Level level) {
+        super(type, level);
     }
 
-    protected FlareEntity(EntityType<? extends AbstractFlare> type, double x, double y, double z, Level level, ItemStack pickupItemStack, ItemStack pickupItemStack1, @Nullable ItemStack firedFromWeapon) {
-        super(type, x, y, z, level, pickupItemStack, pickupItemStack1, firedFromWeapon);
+    protected FlareEntity(EntityType<? extends AbstractArrow> type, double x, double y, double z, Level level, ItemStack pickupItemStack, @Nullable ItemStack firedFromWeapon) {
+        super(type, x, y, z, level, pickupItemStack, firedFromWeapon);
     }
 
-    protected FlareEntity(EntityType<? extends AbstractFlare> type, LivingEntity mob, Level level, ItemStack pickupItemStack, @Nullable ItemStack firedFromWeapon, ItemStack pickupItemStack1) {
-        super(type, mob, level, pickupItemStack, firedFromWeapon, pickupItemStack1);
+    protected FlareEntity(EntityType<? extends AbstractArrow> type, LivingEntity mob, Level level, ItemStack pickupItemStack, @Nullable ItemStack firedFromWeapon) {
+        super(type, mob, level, pickupItemStack, firedFromWeapon);
     }
+    public void doPostHurtEffects(LivingEntity target){
+        target.
 
-    public <T extends Entity> FlareEntity(EntityType<T> tEntityType, Level level) {
-        super(tEntityType, level);
-}
-
-    public FlareEntity(Level level, LivingEntity owner, ItemStack itemStack, @Nullable ItemStack firedfromweapon) {
-        super(level, owner, itemStack, firedfromweapon);
     }
 }
+
+
+
 
 
 
