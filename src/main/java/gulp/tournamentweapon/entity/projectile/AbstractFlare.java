@@ -12,6 +12,7 @@ import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.Mth;
 import net.minecraft.util.Unit;
 import net.minecraft.world.damagesource.DamageSource;
@@ -19,9 +20,11 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.MoverType;
+import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.entity.projectile.ProjectileDeflection;
+import net.minecraft.world.entity.projectile.ProjectileUtil;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.level.ClipContext;
@@ -289,27 +292,68 @@ public class AbstractFlare extends Projectile {
                 }
             }
 
-            this.playSound(this.soundEvent, 1.0F, 1.2F / (this.random.nextFloat() * 0.2F + 0.9F));
-            if (this.getPierceLevel() <= 0) {
-                this.discard();
-            }
-        } else if (entity.projectileReceivesSideEffectsOnHit(false)) {
-            entity.setRemainingFireTicks(remainingFireTicks);
-            this.deflect(ProjectileDeflection.REVERSE, entity, this.owner, false, 0.2);
-            Level var20 = this.level();
-            if (var20 instanceof ServerLevel) {
-                ServerLevel level = (ServerLevel)var20;
-                if (this.getDeltaMovement().lengthSqr() < 1.0E-7) {
-                    if (this.pickup == AbstractArrow.Pickup.ALLOWED) {
-                        this.spawnAtLocation(level, this.getPickupItem(), 0.1F);
-                    }
 
-                    this.discard();
+
+        }
+
+    }
+    protected void doKnockback(final LivingEntity mob, final DamageSource damageSource) {
+        float var10000;
+        label18: {
+            if (this.firedFromWeapon != null) {
+                Level var6 = this.level();
+                if (var6 instanceof ServerLevel) {
+                    ServerLevel serverLevel = (ServerLevel)var6;
+                    var10000 = EnchantmentHelper.modifyKnockback(serverLevel, this.firedFromWeapon, mob, damageSource, 0.0F);
+                    break label18;
                 }
+            }
+
+            var10000 = 0.0F;
+        }
+        double knockback = (double)var10000;
+        if (knockback > (double)0.0F) {
+            double knockbackResistance = Math.max((double)0.0F, (double)1.0F - mob.getAttributeValue(Attributes.KNOCKBACK_RESISTANCE));
+            Vec3 movement = this.getDeltaMovement().multiply((double)1.0F, (double)0.0F, (double)1.0F).normalize().scale(knockback * 0.6 * knockbackResistance);
+            if (movement.lengthSqr() > (double)0.0F) {
+                mob.push(movement.x, 0.1, movement.z);
             }
         }
 
     }
+    protected void onHitBlock(final BlockHitResult hitResult) {
+        super.onHitBlock(hitResult);
+        Level level = level();
+        if (!level.isClientSide()){
+            BlockPos pos = hitResult.getBlockPos().relative(hitResult.getDirection());
+            if(level.isEmptyBlock(pos)){
+                level.setBlockAndUpdate(pos, BaseFireBlock.getState(level, pos));
+            }
+        }
+    }
+    public @Nullable ItemStack getWeaponItem() {
+        return this.firedFromWeapon;
+    }
+
+    protected SoundEvent getDefaultHitGroundSoundEvent() {
+        return SoundEvents.ARROW_HIT;
+    }
+
+    protected final SoundEvent getHitGroundSoundEvent() {
+        return this.soundEvent;
+    }
+
+    protected void doPostHurtEffects(final LivingEntity mob) {
+    }
+    protected @Nullable EntityHitResult findHitEntity(final Vec3 from, final Vec3 to) {
+        return ProjectileUtil.getEntityHitResult(this.level(), this, from, to, this.getBoundingBox().expandTowards(this.getDeltaMovement()).inflate((double)1.0F), this::canHitEntity);
+    }
+
+    protected Collection<EntityHitResult> findHitEntities(final Vec3 from, final Vec3 to) {
+        return ProjectileUtil.getManyEntityHitResult(this.level(), this, from, to, this.getBoundingBox().expandTowards(this.getDeltaMovement()).inflate((double)1.0F), this::canHitEntity, false, false);
+    }
+
+
 
 
 
