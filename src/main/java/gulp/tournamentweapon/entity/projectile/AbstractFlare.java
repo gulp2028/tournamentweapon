@@ -25,8 +25,6 @@ public class AbstractFlare extends AbstractArrow {
         super(type, mob, level, pickupItemStack, firedFromWeapon);
     }
 
-
-
     @Override
     public void tickDespawn(){
         ++this.life;
