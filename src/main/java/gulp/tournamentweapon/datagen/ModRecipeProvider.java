@@ -57,18 +57,47 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                         .pattern("AAA")
                         .define('A', Items.RESPAWN_ANCHOR)
                         .define('N', Items.NETHERITE_SWORD)
-                        .unlockedBy(getHasName(ModItems.STIRLITE), has(ModItems.STIRLITE))
+                        .unlockedBy(getHasName(Items.RESPAWN_ANCHOR), has(Items.NETHERITE_SWORD))
                         .group("Mod ingots")
                         .save(output);
                 shaped(RecipeCategory.MISC, ModItems.ZEPHYR)
                         .pattern(" S ")
                         .pattern(" S ")
                         .pattern(" T ")
-                        .define('A', Items.RESPAWN_ANCHOR)
-                        .define('N', Items.NETHERITE_SWORD)
+                        .define('S', ModItems.STIRLITE)
+                        .define('T', Items.STICK)
                         .unlockedBy(getHasName(ModItems.STIRLITE), has(ModItems.STIRLITE))
                         .group("Mod weapons")
                         .save(output);
+                shaped(RecipeCategory.MISC, ModItems.ICE_AXE)
+                        .pattern("II ")
+                        .pattern("IT ")
+                        .pattern(" T ")
+                        .define('I', ModItems.ICIUM)
+                        .define('T', Items.STICK)
+                        .unlockedBy(getHasName(ModItems.ICIUM), has(ModItems.ICIUM))
+                        .group("Mod weapons")
+                        .save(output);
+                shaped(RecipeCategory.MISC, ModItems.WINGED_SWORD)
+                        .pattern(" U ")
+                        .pattern(" U ")
+                        .pattern(" T ")
+                        .define('S', ModItems.UPSIDEDOWNIUM)
+                        .define('T', Items.STICK)
+                        .unlockedBy(getHasName(ModItems.UPSIDEDOWNIUM), has(ModItems.UPSIDEDOWNIUM))
+                        .group("Mod weapons")
+                        .save(output);
+                shaped(RecipeCategory.MISC, ModItems.HAMMER)
+                        .pattern("SSS")
+                        .pattern("SSS")
+                        .pattern(" T ")
+                        .define('S', ModItems.SHORTIUM)
+                        .define('T', Items.STICK)
+                        .unlockedBy(getHasName(ModItems.SHORTIUM), has(ModItems.SHORTIUM))
+                        .group("Mod weapons")
+                        .save(output);
+
+
 
             }
         };
