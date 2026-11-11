@@ -17,7 +17,6 @@ public class Winged_SwordItem extends Item {
         attacker.teleportRelative(0,54,0);
         super.postHurtEnemy(itemStack, entity, attacker);
 
-
         if (!(attacker instanceof Player player)) {
             return;
         }

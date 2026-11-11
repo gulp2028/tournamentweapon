@@ -16,7 +16,7 @@ public class Tournamentweapon implements ModInitializer {
 	@Override
 	public void onInitialize() {
 		ModItems.registerModItems();
-		ModEntities.registerModEntities();
+
 		ModEntityTypes.initialize();
 
 

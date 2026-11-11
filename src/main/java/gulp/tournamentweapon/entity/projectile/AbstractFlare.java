@@ -1,5 +1,6 @@
 package gulp.tournamentweapon.entity.projectile;
 
+import gulp.tournamentweapon.entity.ModEntityTypes;
 import gulp.tournamentweapon.item.ModItems;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
@@ -24,8 +25,11 @@ public class AbstractFlare extends AbstractArrow {
     protected AbstractFlare(EntityType<? extends AbstractArrow> type, LivingEntity mob, Level level, ItemStack pickupItemStack, @Nullable ItemStack firedFromWeapon) {
         super(type, mob, level, pickupItemStack, firedFromWeapon);
     }
+    public AbstractFlare(Level level, ItemStack sourceItemStack, double x, double y, double z, boolean shotAtAngle
+    ) {super(ModEntityTypes.FLARE, x, y, z, level, sourceItemStack, ItemStack.EMPTY);}
 
-    @Override
+
+        @Override
     public void tickDespawn(){
         ++this.life;
         if(this.life >= 200){
