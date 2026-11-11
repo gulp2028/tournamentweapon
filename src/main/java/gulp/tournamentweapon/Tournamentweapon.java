@@ -1,6 +1,5 @@
 package gulp.tournamentweapon;
 
-import gulp.tournamentweapon.entity.ModEntities;
 import gulp.tournamentweapon.entity.ModEntityTypes;
 import gulp.tournamentweapon.item.ModItems;
 import net.fabricmc.api.ModInitializer;

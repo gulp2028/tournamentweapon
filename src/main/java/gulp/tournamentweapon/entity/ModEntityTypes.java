@@ -11,10 +11,14 @@ import javax.swing.text.html.parser.Entity;
 
 
 public class ModEntityTypes {
+
     public static final EntityType<FlareEntity> FLARE = register(
             ModEntityTypeIds.FLARE_ENTITY,
             EntityType.Builder.<FlareEntity>of(FlareEntity::new, MobCategory.MISC)
-            .sized(0.2F, 0.2F));
+                    .sized(0.25f, 0.25f)
+                    .clientTrackingRange(4)
+                    .updateInterval(10)
+    );
 
     private static <T extends Entity> EntityType<FlareEntity> register(ResourceKey<EntityType<?>> key, EntityType.Builder<FlareEntity> builder) {
         return Registry.register(BuiltInRegistries.ENTITY_TYPE, key, builder.build(key));

@@ -19,10 +19,6 @@ import org.jspecify.annotations.Nullable;
 
 public class FlareEntity extends AbstractFlare {
 
-    protected FlareEntity(EntityType<? extends AbstractArrow> type, Level level) {
-        super(type, level);
-    }
-
     protected FlareEntity(EntityType<? extends AbstractArrow> type, double x, double y, double z, Level level, ItemStack pickupItemStack, @Nullable ItemStack firedFromWeapon) {
         super(type, x, y, z, level, pickupItemStack, firedFromWeapon);
     }
@@ -32,7 +28,9 @@ public class FlareEntity extends AbstractFlare {
     }
 
 
-
+    public FlareEntity(EntityType<FlareEntity> flareEntityEntityType, Level level) {
+        super(flareEntityEntityType, level);
+    }
 }
 
 

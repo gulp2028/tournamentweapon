@@ -24,6 +24,9 @@ public class AbstractFlare extends AbstractArrow {
     protected AbstractFlare(EntityType<? extends AbstractArrow> type, LivingEntity mob, Level level, ItemStack pickupItemStack, @Nullable ItemStack firedFromWeapon) {
         super(type, mob, level, pickupItemStack, firedFromWeapon);
     }
+
+
+
     @Override
     public void tickDespawn(){
         ++this.life;
