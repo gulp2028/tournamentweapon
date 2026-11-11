@@ -24,7 +24,7 @@ public class ModRecipeProvider extends FabricRecipeProvider {
 
     @Override
     protected RecipeProvider createRecipeProvider(HolderLookup.Provider registries, BootstrapContext<Recipe<?>> recipes, BootstrapContext<Advancement> advancements) {
-        return new RecipeProvider(registries, output) {
+        return new RecipeProvider(recipes, advancements) {
             @Override
             public void buildRecipes() {
                 shaped(RecipeCategory.MISC, ModItems.ICIUM)
@@ -34,6 +34,40 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                         .define('I', Items.IRON_INGOT)
                         .unlockedBy(getHasName(ModItems.ICIUM), has(ModItems.ICIUM))
                         .group("Mod ingots")
+                        .save(output);
+                shaped(RecipeCategory.MISC, ModItems.SHORTIUM)
+                        .pattern("AA")
+                        .pattern("II")
+                        .define('A', Items.ANVIL)
+                        .define('I', Items.IRON_INGOT)
+                        .unlockedBy(getHasName(ModItems.SHORTIUM), has(ModItems.SHORTIUM))
+                        .group("Mod ingots")
+                        .save(output);
+                shaped(RecipeCategory.MISC, ModItems.UPSIDEDOWNIUM)
+                        .pattern("FF")
+                        .pattern("II")
+                        .define('f', Items.FEATHER)
+                        .define('I', Items.IRON_INGOT)
+                        .unlockedBy(getHasName(ModItems.UPSIDEDOWNIUM), has(ModItems.UPSIDEDOWNIUM))
+                        .group("Mod ingots")
+                        .save(output);
+                shaped(RecipeCategory.MISC, ModItems.STIRLITE)
+                        .pattern("AAA")
+                        .pattern("ANA")
+                        .pattern("AAA")
+                        .define('A', Items.RESPAWN_ANCHOR)
+                        .define('N', Items.NETHERITE_SWORD)
+                        .unlockedBy(getHasName(ModItems.STIRLITE), has(ModItems.STIRLITE))
+                        .group("Mod ingots")
+                        .save(output);
+                shaped(RecipeCategory.MISC, ModItems.ZEPHYR)
+                        .pattern(" S ")
+                        .pattern(" S ")
+                        .pattern(" T ")
+                        .define('A', Items.RESPAWN_ANCHOR)
+                        .define('N', Items.NETHERITE_SWORD)
+                        .unlockedBy(getHasName(ModItems.STIRLITE), has(ModItems.STIRLITE))
+                        .group("Mod weapons")
                         .save(output);
 
             }
