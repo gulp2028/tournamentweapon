@@ -1,6 +1,7 @@
 package gulp.tournamentweapon.entity.projectile;
 
 import gulp.tournamentweapon.item.ModItems;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.projectile.arrow.AbstractArrow;
@@ -28,6 +29,13 @@ public class AbstractFlare extends AbstractArrow {
         ++this.life;
         if(this.life >= 200){
             this.discard();
+        }
+    }
+    @Override
+    protected void onHitEntity(EntityHitResult hitResult){
+        Entity target = hitResult.getEntity();
+        if(!target.isOnFire()){
+            target.igniteForSeconds(10);
         }
     }
 

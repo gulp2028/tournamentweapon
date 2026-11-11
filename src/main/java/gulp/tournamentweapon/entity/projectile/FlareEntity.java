@@ -30,10 +30,9 @@ public class FlareEntity extends AbstractFlare {
     protected FlareEntity(EntityType<? extends AbstractArrow> type, LivingEntity mob, Level level, ItemStack pickupItemStack, @Nullable ItemStack firedFromWeapon) {
         super(type, mob, level, pickupItemStack, firedFromWeapon);
     }
-    public void doPostHurtEffects(LivingEntity target){
-        target.
 
-    }
+
+
 }
 
 
