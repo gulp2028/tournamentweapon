@@ -32,7 +32,7 @@ public class AbstractFlare extends AbstractArrow {
         @Override
     public void tickDespawn(){
         ++this.life;
-        if(this.life >= 200){
+        if(this.life >= 600){
             this.discard();
         }
     }

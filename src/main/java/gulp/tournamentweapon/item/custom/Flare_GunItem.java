@@ -21,16 +21,13 @@ public class Flare_GunItem extends CrossbowItem {
 
     }
 
-    public static int getChargeDuration(final ItemStack crossbow, final LivingEntity user) {
-        float duration = EnchantmentHelper.modifyCrossbowChargingTime(crossbow, user, 1.25F);
-        return Mth.floor(duration * 20.0F);
-    }
+
 
     @Override
     public Predicate<ItemStack> getSupportedHeldProjectiles() {
         return itemStack -> itemStack.is(ModItemTags.FLARE_ONLY);
     }
-
+    @Override
     protected Projectile createProjectile(final Level level, final LivingEntity shooter, final ItemStack heldItem, final ItemStack projectile, final boolean isCrit) {
         return new FlareEntity(level, projectile, shooter, shooter.getX(), shooter.getEyeY() - (double)0.15F, shooter.getZ(), true);
 

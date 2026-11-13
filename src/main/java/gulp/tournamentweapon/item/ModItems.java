@@ -23,10 +23,10 @@ public class ModItems {
     public static final Item SHORTIUM = registerItem("shortium", Item::new);
     public static final Item WINGED_SWORD = registerItem("winged_sword",
             properties -> new Winged_SwordItem(properties.sword(ModToolMaterials.UPSIDEDOWNIUM,
-                    4, -2.4f)));
+                    2, -2.4f)));
     public static final Item HAMMER = registerItem("hammer",
             properties -> new HammerItem(properties.sword(ModToolMaterials.SHORTIUM,
-                   4, -2)));
+                   3, -3)));
     public static final Item FLARE_GUN = registerItem("flare_gun",
             properties -> new Flare_GunItem(properties.durability(500)));
     public static final Item ICE_AXE = registerItem("ice_axe",
@@ -36,7 +36,7 @@ public class ModItems {
             properties -> new FlareItem(properties));
     //public static final Item BUTTERFLY_BOOTS = registerItem("butterfly_boots",
     //        (new Item.Properties()).humanoidArmor(ModArmorMaterials.SHORTIUM, ArmorType.BOOTS));
-    public static final Item ZEPHYR = registerItem("zepyhr",
+    public static final Item ZEPHYR = registerItem("zephyr",
             properties -> new ZephyrItem(properties.sword(ModToolMaterials.STIRLITE,
                     4, -2)));
 
@@ -64,6 +64,7 @@ public class ModItems {
             output.accept(FLARE_GUN);
             output.accept(FLARE);
             output.accept(ZEPHYR);
+            output.accept(FLARE_GUN);
         });
 
 
